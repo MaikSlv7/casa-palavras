@@ -1,0 +1,58 @@
+
+body {
+  margin: 0;
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  background-color: black;
+  color: #0ff;
+}
+#painel-info {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+}
+#word-grid {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(30px, 1fr));
+  gap: 5px;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 0 10px;
+}
+.letter {
+  aspect-ratio: 1/1;
+  border: 2px solid #0ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  color: #0ff;
+  cursor: pointer;
+  font-weight: bold;
+  user-select: none;
+  font-size: clamp(9px, 2.2vw, 16px);
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.letter.selected {
+  background-color: #004d99;
+  color: #fff;
+  border: 2px solid #00ffff;
+}
+.letter.found {
+  background-color: #00ff88;
+  color: black;
+  border-color: #00ff88;
+}
+
+.tema-retro .letter.selected {
+  background-color: #004d99 !important;
+  color: #ffffff !important;
+  border: 2px solid #00ffff !important;
+}
+.tema-retro .letter.found {
+  background-color: #00ff88 !important;
+  color: black !important;
+  border-color: #00ff88 !important;
+}
