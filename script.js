@@ -3,8 +3,9 @@ let palavras = [];
 let gridSize = 12;
 let letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let direcoes = [[1, 0], [0, 1], [1, 1], [-1, 1]];
-let grade = [], palavrasEncontradas = 0, cronometroAtivo = false, segundos = 0, intervalo;
+let grade = [], palavrasEncontradas = 0, tempoRestante = 0, intervalo;
 let selecionando = false, selecaoAtual = "", posicoesSelecionadas = [], palavrasJaEncontradas = new Set();
+let pontuacao = 0;
 
 const audioClick = new Audio('click.wav');
 const audioDing = new Audio('ding.wav');
@@ -14,6 +15,7 @@ function iniciarJogo() {
   gridSize = (nivel === 'dificil') ? 16 : 12;
 
   palavrasEncontradas = 0;
+  pontuacao = 0;
   palavrasJaEncontradas.clear();
   selecaoAtual = "";
   posicoesSelecionadas = [];
@@ -34,26 +36,38 @@ function iniciarJogo() {
   gerarGrade();
   gerarTabuleiro();
   atualizarPlacar();
-  segundos = 0;
-  document.getElementById('cronometro').textContent = "⏱️ 00:00";
+
+  const tempoPorNivel = { facil: 90, medio: 120, dificil: 180 };
+  tempoRestante = tempoPorNivel[nivel];
+  atualizarCronometro();
   clearInterval(intervalo);
-  cronometroAtivo = false;
+  intervalo = setInterval(() => {
+    tempoRestante--;
+    atualizarCronometro();
+    if (tempoRestante <= 0) {
+      encerrarJogo();
+    }
+  }, 1000);
 }
 
-function startCronometro() {
-  if (!cronometroAtivo) {
-    cronometroAtivo = true;
-    intervalo = setInterval(() => {
-      segundos++;
-      const min = String(Math.floor(segundos / 60)).padStart(2, '0');
-      const sec = String(segundos % 60).padStart(2, '0');
-      document.getElementById('cronometro').textContent = `⏱️ ${min}:${sec}`;
-    }, 1000);
-  }
+function atualizarCronometro() {
+  const min = String(Math.floor(tempoRestante / 60)).padStart(2, '0');
+  const sec = String(tempoRestante % 60).padStart(2, '0');
+  document.getElementById('cronometro').textContent = `⏱️ ${min}:${sec}`;
 }
 
 function atualizarPlacar() {
-  document.getElementById("progresso").textContent = `🔎 ${palavrasEncontradas} / ${palavras.length} palavras`;
+  document.getElementById("progresso").textContent = `🔎 ${palavrasEncontradas} / ${palavras.length} palavras | 🎯 ${pontuacao} pontos`;
+}
+
+function encerrarJogo() {
+  clearInterval(intervalo);
+  const mensagem = `🏁 Fim de jogo!
+
+✅ Palavras encontradas: ${palavrasEncontradas} de ${palavras.length}
+⏱️ Tempo restante: ${document.getElementById('cronometro').textContent.split(" ")[1]}
+🎯 Pontuação final: ${pontuacao}`;
+  alert(mensagem);
 }
 
 function inserirPalavra(palavra) {
@@ -109,7 +123,6 @@ function gerarTabuleiro() {
 
       div.addEventListener("mousedown", (e) => {
         e.preventDefault();
-        startCronometro();
         selecionando = true;
         selecionarLetra(div);
       });
@@ -121,7 +134,6 @@ function gerarTabuleiro() {
       });
       div.addEventListener("touchstart", (e) => {
         e.preventDefault();
-        startCronometro();
         selecionarLetra(div);
         selecionando = true;
       });
@@ -153,13 +165,19 @@ function selecionarLetra(div) {
 
 function verificarPalavraSelecionada() {
   const palavraFormada = selecaoAtual;
+  const nivel = document.querySelector('input[name=nivel]:checked').value;
+  const pontosPorNivel = { facil: 10, medio: 20, dificil: 30 };
   if (palavras.includes(palavraFormada) && !palavrasJaEncontradas.has(palavraFormada)) {
     posicoesSelecionadas.forEach(div => div.classList.add("found"));
     palavrasEncontradas++;
     palavrasJaEncontradas.add(palavraFormada);
+    pontuacao += pontosPorNivel[nivel];
     atualizarPlacar();
     audioDing.currentTime = 0;
     audioDing.play();
+    if (palavrasEncontradas === palavras.length) {
+      encerrarJogo();
+    }
   } else {
     posicoesSelecionadas.forEach(div => div.classList.remove("selected"));
   }
