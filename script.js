@@ -38,7 +38,7 @@ function iniciarJogo() {
   gerarTabuleiro();
   atualizarPlacar();
 
-  const tempoPorNivel = { facil: 240, medio: 180, dificil: 120 };
+  const tempoPorNivel = { facil: 300, medio: 240, dificil: 180 };
   tempoRestante = tempoPorNivel[nivel];
   atualizarCronometro();
   clearInterval(intervalo);
