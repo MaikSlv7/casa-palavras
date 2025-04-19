@@ -14,8 +14,11 @@ body {
   margin-bottom: 10px;
 }
 #word-grid {
+  max-width: 95vw;
+  width: 100%;
+
   display: grid;
-  grid-template-columns: repeat(16, minmax(30px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
   gap: 5px;
   justify-content: center;
   margin-top: 20px;
@@ -32,7 +35,7 @@ body {
   cursor: pointer;
   font-weight: bold;
   user-select: none;
-  font-size: clamp(9px, 2.2vw, 16px);
+  font-size: clamp(6px, 1.6vw, 14px);
   transition: background 0.2s, color 0.2s, border 0.2s;
 }
 .letter.selected {
