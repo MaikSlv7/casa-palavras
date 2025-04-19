@@ -84,3 +84,26 @@ button {
   text-decoration: line-through;
   color: #888;
 }
+
+#painel-extra {
+  margin-top: 10px;
+  font-size: 0.6rem;
+  color: #0ff;
+  max-width: 90vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+#ranking, #historico {
+  margin-top: 10px;
+  text-align: left;
+}
+#historico ul {
+  padding-left: 15px;
+}
+.novo-recorde {
+  animation: flash 0.3s alternate 5;
+}
+@keyframes flash {
+  0% { background-color: black; }
+  100% { background-color: #002244; }
+}
