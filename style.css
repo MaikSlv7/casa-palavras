@@ -14,15 +14,18 @@ body {
   margin-bottom: 10px;
 }
 #word-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
   max-width: 95vw;
   width: 100%;
-
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
   gap: 5px;
   justify-content: center;
   margin-top: 20px;
   padding: 0 10px;
+}
+#word-grid.grid-16 {
+  grid-template-columns: repeat(16, 1fr);
+  max-width: 800px;
 }
 .letter {
   aspect-ratio: 1/1;
@@ -35,7 +38,8 @@ body {
   cursor: pointer;
   font-weight: bold;
   user-select: none;
-  font-size: clamp(6px, 1.6vw, 14px);
+  font-size: clamp(5px, 1.2vw, 12px);
+  padding: 2px;
   transition: background 0.2s, color 0.2s, border 0.2s;
 }
 .letter.selected {

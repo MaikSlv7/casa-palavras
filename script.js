@@ -17,7 +17,10 @@ function iniciarJogo() {
   palavrasJaEncontradas.clear();
   selecaoAtual = "";
   posicoesSelecionadas = [];
-  document.getElementById("word-grid").innerHTML = "";
+
+  const grid = document.getElementById("word-grid");
+  grid.innerHTML = "";
+  grid.className = (gridSize === 16) ? "grid-16" : "";
 
   grade = Array(gridSize).fill(null).map(() => Array(gridSize).fill(""));
 
