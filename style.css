@@ -72,3 +72,15 @@ button {
   margin: 10px;
   cursor: pointer;
 }
+
+#lista-palavras {
+  font-size: 0.6rem;
+  margin: 10px auto;
+  max-width: 90vw;
+  color: #0ff;
+  word-wrap: break-word;
+}
+#lista-palavras-span .encontrada {
+  text-decoration: line-through;
+  color: #888;
+}

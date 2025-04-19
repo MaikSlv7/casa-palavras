@@ -32,6 +32,7 @@ function iniciarJogo() {
     dificil: ["COMPUTADOR", "DESENVOLVEDOR", "ENGENHARIA", "EDUCACAO", "FUNDAMENTAL", "EXPERIENCIA", "INICIATIVA", "PROGRAMAÇÃO"]
   };
   palavras = palavrasPorNivel[nivel];
+  atualizarListaPalavras();
 
   gerarGrade();
   gerarTabuleiro();
@@ -168,6 +169,7 @@ function verificarPalavraSelecionada() {
   const nivel = document.querySelector('input[name=nivel]:checked').value;
   const pontosPorNivel = { facil: 10, medio: 20, dificil: 30 };
   if (palavras.includes(palavraFormada) && !palavrasJaEncontradas.has(palavraFormada)) {
+    marcarPalavraNaLista(palavraFormada);
     posicoesSelecionadas.forEach(div => div.classList.add("found"));
     palavrasEncontradas++;
     palavrasJaEncontradas.add(palavraFormada);
@@ -184,4 +186,15 @@ function verificarPalavraSelecionada() {
   selecaoAtual = "";
   posicoesSelecionadas = [];
   selecionando = false;
+}
+
+
+function atualizarListaPalavras() {
+  const span = document.getElementById("lista-palavras-span");
+  span.innerHTML = palavras.map(p => `<span id="palavra-${p}">${p}</span>`).join(" - ");
+}
+
+function marcarPalavraNaLista(palavra) {
+  const el = document.getElementById("palavra-" + palavra);
+  if (el) el.classList.add("encontrada");
 }
