@@ -1,6 +1,6 @@
 
 let palavras = [];
-let gridSize = 10;
+let gridSize = 12;
 let letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let direcoes = [[1, 0], [0, 1], [1, 1], [-1, 1]];
 let grade = [], palavrasEncontradas = 0, cronometroAtivo = false, segundos = 0, intervalo;
@@ -10,14 +10,19 @@ const audioClick = new Audio('click.wav');
 const audioDing = new Audio('ding.wav');
 
 function iniciarJogo() {
-  const input = document.getElementById("entrada-palavras").value;
-  palavras = input.split(',').map(p => p.trim().toUpperCase()).filter(p => p);
+  const nivel = document.querySelector('input[name=nivel]:checked').value;
+  const palavrasPorNivel = {
+    facil: ["SOL", "LUA", "MAR", "CÉU"],
+    medio: ["NATUREZA", "VIAGEM", "ESCOLA", "PESSOAL", "COMIDA", "ANIMAL"],
+    dificil: ["COMPUTADOR", "DESENVOLVEDOR", "ENGENHARIA", "EDUCACAO", "FUNDAMENTAL", "EXPERIENCIA", "INICIATIVA", "PROGRAMAÇÃO"]
+  };
+  palavras = palavrasPorNivel[nivel];
   palavrasEncontradas = 0;
   palavrasJaEncontradas.clear();
   selecaoAtual = "";
   posicoesSelecionadas = [];
   document.getElementById("word-grid").innerHTML = "";
-  gridSize = 10;
+  gridSize = 12;
   grade = Array(gridSize).fill(null).map(() => Array(gridSize).fill(""));
   gerarGrade();
   gerarTabuleiro();
@@ -110,8 +115,8 @@ function gerarTabuleiro() {
       div.addEventListener("touchstart", (e) => {
         e.preventDefault();
         startCronometro();
-        selecionando = true;
         selecionarLetra(div);
+        selecionando = true;
       });
       div.addEventListener("touchmove", (e) => {
         const touch = e.touches[0];

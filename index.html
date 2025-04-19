@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Caça-Palavras Retrô Personalizado</title>
+  <title>Caça-Palavras por Dificuldade</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -15,8 +15,12 @@
     <span id="progresso">🔎 0 / 0 palavras</span>
   </div>
 
-  <textarea id="entrada-palavras" placeholder="Digite palavras separadas por vírgula" rows="3"></textarea>
-  <br>
+  <div id="menu-dificuldade">
+    <label><input type="radio" name="nivel" value="facil" checked> Fácil</label>
+    <label><input type="radio" name="nivel" value="medio"> Médio</label>
+    <label><input type="radio" name="nivel" value="dificil"> Difícil</label>
+  </div>
+
   <button onclick="iniciarJogo()">Iniciar Jogo</button>
 
   <div id="word-grid"></div>
