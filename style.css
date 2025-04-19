@@ -15,7 +15,7 @@ body {
 }
 #word-grid {
   display: grid;
-  grid-template-columns: repeat(12, minmax(30px, 1fr));
+  grid-template-columns: repeat(16, minmax(30px, 1fr));
   gap: 5px;
   justify-content: center;
   margin-top: 20px;

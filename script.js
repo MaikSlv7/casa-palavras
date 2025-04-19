@@ -1,6 +1,6 @@
 
 let palavras = [];
-let gridSize = (nivel === 'dificil') ? 16 : 12;
+let gridSize = 12;
 let letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let direcoes = [[1, 0], [0, 1], [1, 1], [-1, 1]];
 let grade = [], palavrasEncontradas = 0, cronometroAtivo = false, segundos = 0, intervalo;
@@ -11,19 +11,23 @@ const audioDing = new Audio('ding.wav');
 
 function iniciarJogo() {
   const nivel = document.querySelector('input[name=nivel]:checked').value;
+  gridSize = (nivel === 'dificil') ? 16 : 12;
+
+  palavrasEncontradas = 0;
+  palavrasJaEncontradas.clear();
+  selecaoAtual = "";
+  posicoesSelecionadas = [];
+  document.getElementById("word-grid").innerHTML = "";
+
+  grade = Array(gridSize).fill(null).map(() => Array(gridSize).fill(""));
+
   const palavrasPorNivel = {
     facil: ["SOL", "LUA", "MAR", "CÉU"],
     medio: ["NATUREZA", "VIAGEM", "ESCOLA", "PESSOAL", "COMIDA", "ANIMAL"],
     dificil: ["COMPUTADOR", "DESENVOLVEDOR", "ENGENHARIA", "EDUCACAO", "FUNDAMENTAL", "EXPERIENCIA", "INICIATIVA", "PROGRAMAÇÃO"]
   };
   palavras = palavrasPorNivel[nivel];
-  palavrasEncontradas = 0;
-  palavrasJaEncontradas.clear();
-  selecaoAtual = "";
-  posicoesSelecionadas = [];
-  document.getElementById("word-grid").innerHTML = "";
-  gridSize = (nivel === 'dificil') ? 16 : 12;
-  grade = Array(gridSize).fill(null).map(() => Array(gridSize).fill(""));
+
   gerarGrade();
   gerarTabuleiro();
   atualizarPlacar();
