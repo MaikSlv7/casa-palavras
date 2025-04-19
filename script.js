@@ -1,20 +1,32 @@
-const gridSize = 10;
-let palavras = ["HTML", "CSS", "JS", "WEB"];
-const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const direcoes = [[1, 0], [0, 1], [1, 1], [-1, 1]];
-let grade = Array(gridSize).fill(null).map(() => Array(gridSize).fill(""));
 
-let palavrasEncontradas = 0;
-let cronometroAtivo = false;
-let segundos = 0;
-let intervalo;
-let selecionando = false;
-let selecaoAtual = "";
-let posicoesSelecionadas = [];
-let palavrasJaEncontradas = new Set();
+let palavras = [];
+let gridSize = 10;
+let letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+let direcoes = [[1, 0], [0, 1], [1, 1], [-1, 1]];
+let grade = [], palavrasEncontradas = 0, cronometroAtivo = false, segundos = 0, intervalo;
+let selecionando = false, selecaoAtual = "", posicoesSelecionadas = [], palavrasJaEncontradas = new Set();
 
 const audioClick = new Audio('click.wav');
 const audioDing = new Audio('ding.wav');
+
+function iniciarJogo() {
+  const input = document.getElementById("entrada-palavras").value;
+  palavras = input.split(',').map(p => p.trim().toUpperCase()).filter(p => p);
+  palavrasEncontradas = 0;
+  palavrasJaEncontradas.clear();
+  selecaoAtual = "";
+  posicoesSelecionadas = [];
+  document.getElementById("word-grid").innerHTML = "";
+  gridSize = 10;
+  grade = Array(gridSize).fill(null).map(() => Array(gridSize).fill(""));
+  gerarGrade();
+  gerarTabuleiro();
+  atualizarPlacar();
+  segundos = 0;
+  document.getElementById('cronometro').textContent = "⏱️ 00:00";
+  clearInterval(intervalo);
+  cronometroAtivo = false;
+}
 
 function startCronometro() {
   if (!cronometroAtivo) {
@@ -62,98 +74,60 @@ function inserirPalavra(palavra) {
   }
 }
 
-palavras.forEach(p => inserirPalavra(p));
-for (let y = 0; y < gridSize; y++) {
-  for (let x = 0; x < gridSize; x++) {
-    if (grade[y][x] === "") {
-      grade[y][x] = letras[Math.floor(Math.random() * letras.length)];
+function gerarGrade() {
+  palavras.forEach(p => inserirPalavra(p));
+  for (let y = 0; y < gridSize; y++) {
+    for (let x = 0; x < gridSize; x++) {
+      if (grade[y][x] === "") {
+        grade[y][x] = letras[Math.floor(Math.random() * letras.length)];
+      }
     }
   }
 }
 
-const container = document.getElementById("word-grid");
+function gerarTabuleiro() {
+  const container = document.getElementById("word-grid");
+  for (let y = 0; y < gridSize; y++) {
+    for (let x = 0; x < gridSize; x++) {
+      const div = document.createElement("div");
+      div.className = "letter";
+      div.textContent = grade[y][x];
+      div.dataset.x = x;
+      div.dataset.y = y;
 
-function verificarPalavraSelecionada() {
-  const palavraFormada = selecaoAtual;
-  if (palavras.includes(palavraFormada) && !palavrasJaEncontradas.has(palavraFormada)) {
-    posicoesSelecionadas.forEach(div => div.classList.add("found"));
-    palavrasEncontradas++;
-    palavrasJaEncontradas.add(palavraFormada);
-    atualizarPlacar();
-    audioDing.play();
-  } else {
-    posicoesSelecionadas.forEach(div => div.classList.remove("selected"));
-  }
-  selecaoAtual = "";
-  posicoesSelecionadas = [];
-  selecionando = false;
-}
+      div.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        startCronometro();
+        selecionando = true;
+        selecionarLetra(div);
+      });
+      div.addEventListener("mouseover", () => {
+        if (selecionando) selecionarLetra(div);
+      });
+      document.addEventListener("mouseup", () => {
+        if (selecionando) verificarPalavraSelecionada();
+      });
+      div.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        startCronometro();
+        selecionando = true;
+        selecionarLetra(div);
+      });
+      div.addEventListener("touchmove", (e) => {
+        const touch = e.touches[0];
+        const el = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (el && el.classList.contains("letter") && selecionando) {
+          selecionarLetra(el);
+        }
+      });
+      div.addEventListener("touchend", () => {
+        if (selecionando) verificarPalavraSelecionada();
+      });
 
-function selecionarLetra(div) {
-  if (!div.classList.contains("selected")) {
-    div.classList.add("selected");
-    selecaoAtual += div.textContent;
-    posicoesSelecionadas.push(div);
-    audioClick.currentTime = 0;
-    audioClick.play();
-  }
-}
-
-for (let y = 0; y < gridSize; y++) {
-  for (let x = 0; x < gridSize; x++) {
-    const div = document.createElement("div");
-    div.className = "letter";
-    div.textContent = grade[y][x];
-    div.dataset.x = x;
-    div.dataset.y = y;
-
-    div.addEventListener("mousedown", (e) => {
-      e.preventDefault();
-      startCronometro();
-      selecionando = true;
-      selecionarLetra(div);
-    });
-
-    div.addEventListener("mouseover", () => {
-      if (selecionando) selecionarLetra(div);
-    });
-
-    document.addEventListener("mouseup", () => {
-      if (selecionando) verificarPalavraSelecionada();
-    });
-
-    div.addEventListener("touchstart", (e) => {
-      e.preventDefault();
-      startCronometro();
-      selecionando = true;
-      selecionarLetra(div);
-    });
-
-    div.addEventListener("touchmove", (e) => {
-      const touch = e.touches[0];
-      const el = document.elementFromPoint(touch.clientX, touch.clientY);
-      if (el && el.classList.contains("letter") && selecionando) {
-        selecionarLetra(el);
-      }
-    });
-
-    div.addEventListener("touchend", () => {
-      if (selecionando) verificarPalavraSelecionada();
-    });
-
-    container.appendChild(div);
+      container.appendChild(div);
+    }
   }
 }
-
-function mudarTema(tema) {
-  document.body.className = "";
-  document.body.classList.add(`tema-${tema}`);
-}
-
-atualizarPlacar();
-
-const audioClick = new Audio('click.wav');
-const audioDing = new Audio('ding.wav');
 
 function selecionarLetra(div) {
   if (!div.classList.contains("selected")) {

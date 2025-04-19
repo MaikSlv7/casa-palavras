@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Caça-Palavras Retrô</title>
+  <title>Caça-Palavras Retrô Personalizado</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -12,10 +12,13 @@
 
   <div id="painel-info">
     <span id="cronometro">⏱️ 00:00</span>
-    <span id="progresso">🔎 0 / 4 palavras</span>
+    <span id="progresso">🔎 0 / 0 palavras</span>
   </div>
 
-  <p>Encontre as palavras: <strong>HTML</strong>, <strong>CSS</strong>, <strong>JS</strong>, <strong>WEB</strong></p>
+  <textarea id="entrada-palavras" placeholder="Digite palavras separadas por vírgula" rows="3"></textarea>
+  <br>
+  <button onclick="iniciarJogo()">Iniciar Jogo</button>
+
   <div id="word-grid"></div>
 
   <script src="script.js"></script>

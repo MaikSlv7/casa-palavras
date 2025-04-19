@@ -37,7 +37,7 @@ body {
 }
 .letter.selected {
   background-color: #004d99;
-  color: #fff;
+  color: #ffffff;
   border: 2px solid #00ffff;
 }
 .letter.found {
@@ -45,14 +45,23 @@ body {
   color: black;
   border-color: #00ff88;
 }
-
-.tema-retro .letter.selected {
-  background-color: #004d99 !important;
-  color: #ffffff !important;
-  border: 2px solid #00ffff !important;
+textarea {
+  width: 90%;
+  max-width: 400px;
+  background: black;
+  color: #0ff;
+  border: 2px solid #0ff;
+  font-family: 'Press Start 2P', cursive;
+  padding: 10px;
+  margin-top: 10px;
+  resize: none;
 }
-.tema-retro .letter.found {
-  background-color: #00ff88 !important;
-  color: black !important;
-  border-color: #00ff88 !important;
+button {
+  font-family: 'Press Start 2P', cursive;
+  background: #0ff;
+  color: black;
+  border: none;
+  padding: 10px 15px;
+  margin: 10px;
+  cursor: pointer;
 }
