@@ -1,6 +1,6 @@
 
 let palavras = [];
-let gridSize = 12;
+let gridSize = nivel === 'dificil' ? 16 : 12;
 let letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let direcoes = [[1, 0], [0, 1], [1, 1], [-1, 1]];
 let grade = [], palavrasEncontradas = 0, cronometroAtivo = false, segundos = 0, intervalo;
@@ -22,7 +22,7 @@ function iniciarJogo() {
   selecaoAtual = "";
   posicoesSelecionadas = [];
   document.getElementById("word-grid").innerHTML = "";
-  gridSize = 12;
+  gridSize = nivel === 'dificil' ? 16 : 12;
   grade = Array(gridSize).fill(null).map(() => Array(gridSize).fill(""));
   gerarGrade();
   gerarTabuleiro();
