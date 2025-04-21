@@ -210,7 +210,13 @@ function selecionarCategoria() {
   const cat = document.getElementById("categoria").value;
   palavrasJaEncontradas.clear();
   if (categorias[cat]) {
-    palavras = [...categorias[cat]];
+    const todas = [...categorias[cat]];
+    const quantidade = Math.floor(Math.random() * 6) + 5; // entre 5 e 10
+    palavras = [];
+    while (palavras.length < quantidade && todas.length > 0) {
+      const index = Math.floor(Math.random() * todas.length);
+      palavras.push(todas.splice(index, 1)[0]);
+    }
     atualizarListaPalavras();
   }
 }
