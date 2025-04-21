@@ -188,7 +188,33 @@ function verificarPalavraSelecionada() {
   selecionando = false;
 }
 
-// Gerar palavras aleatórias
+function atualizarListaPalavras() {
+  const span = document.getElementById("lista-palavras-span");
+  span.innerHTML = palavras.map(p => `<span id="palavra-${p}">${p}</span>`).join(" - ");
+  atualizarPlacar();
+}
+
+// Categorias
+const categorias = {
+  frutas: ["BANANA", "MAÇÃ", "UVA", "LARANJA", "MELANCIA", "MORANGO", "ABACAXI"],
+  animais: ["CACHORRO", "GATO", "ELEFANTE", "LEÃO", "TIGRE", "ZEBRA", "CAVALO"],
+  cores: ["VERMELHO", "AZUL", "AMARELO", "VERDE", "PRETO", "BRANCO", "ROSA"],
+  profissoes: ["MÉDICO", "ENGENHEIRO", "PROFESSOR", "ADVOGADO", "PILOTO", "POLICIAL"],
+  paises: ["BRASIL", "CANADÁ", "ARGENTINA", "ALEMANHA", "ITÁLIA", "JAPÃO", "CHINA"],
+  ortografia: ["PALAVRA", "CEDILHA", "DÍGRAFO", "HÍFEN", "ACENTO", "VERBO", "PRONOME"],
+  matematica: ["SOMA", "SUBTRAÇÃO", "FRAÇÃO", "NÚMERO", "MILHAR", "DECIMAL", "DIVISÃO"],
+  ingles: ["APPLE", "DOG", "HOUSE", "COLOR", "WATER", "SCHOOL", "NUMBER"]
+};
+
+function selecionarCategoria() {
+  const cat = document.getElementById("categoria").value;
+  palavrasJaEncontradas.clear();
+  if (categorias[cat]) {
+    palavras = [...categorias[cat]];
+    atualizarListaPalavras();
+  }
+}
+
 function gerarPalavrasAleatorias() {
   const todas = ["SOL", "LUA", "MAR", "ANIMAL", "CACHORRO", "ESCOLA", "COMIDA", "FRUTA", "VIAGEM", "PAZ", "GUERRA", "FUTEBOL", "AMOR", "ALEGRIA", "TRISTEZA", "CIDADE", "FLORESTA", "CARRO", "AVIAO", "NAVIO", "BRASIL", "FESTA", "CIENCIA"];
   const quantidade = Math.floor(Math.random() * 5) + 6;
@@ -205,11 +231,7 @@ function gerarPalavrasAleatorias() {
   alert("Palavras aleatórias geradas! Clique em 'Iniciar Jogo' para jogar.");
 }
 
-function atualizarListaPalavras() {
-  const span = document.getElementById("lista-palavras-span");
-  span.innerHTML = palavras.map(p => `<span id="palavra-${p}">${p}</span>`).join(" - ");
-}
-
+// Firebase
 function enviarPontuacaoOnline(nome, nivel, pontos) {
   const dados = {
     nome: nome || "Anônimo",
@@ -234,22 +256,4 @@ function carregarRankingOnline() {
       dados.map(r => `<li>${r.nome} - ${r.pontos} pts (${r.nivel})</li>`).join("") +
       "</ol>";
   });
-}
-
-
-
-const categorias = {
-  frutas: ["BANANA", "MAÇÃ", "UVA", "LARANJA", "MELANCIA", "MORANGO", "ABACAXI"],
-  animais: ["CACHORRO", "GATO", "ELEFANTE", "LEÃO", "TIGRE", "ZEBRA", "CAVALO"],
-  cores: ["VERMELHO", "AZUL", "AMARELO", "VERDE", "PRETO", "BRANCO", "ROSA"],
-  profissoes: ["MÉDICO", "ENGENHEIRO", "PROFESSOR", "ADVOGADO", "PILOTO", "POLICIAL"],
-  paises: ["BRASIL", "CANADÁ", "ARGENTINA", "ALEMANHA", "ITÁLIA", "JAPÃO", "CHINA"]
-};
-
-function selecionarCategoria() {
-  const cat = document.getElementById("categoria").value;
-  if (categorias[cat]) {
-    palavras = [...categorias[cat]];
-    atualizarListaPalavras();
-  }
 }
