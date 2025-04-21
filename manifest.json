@@ -1,1 +1,1 @@
-{"name": "Ca\u00e7a-Palavras", "short_name": "Ca\u00e7a", "start_url": "/casa-palavras/index.html", "display": "standalone", "background_color": "#1a1a1a", "theme_color": "#00ffff", "icons": [{"src": "/casa-palavras/icon-512.png", "sizes": "512x512", "type": "image/png"}]}
+{"name": "Ca\u00e7a-Palavras", "short_name": "Ca\u00e7a", "start_url": "/casa-palavras/", "scope": "/casa-palavras/", "display": "standalone", "background_color": "#1a1a1a", "theme_color": "#00ffff", "icons": [{"src": "/casa-palavras/icon-512.png", "sizes": "512x512", "type": "image/png"}]}
