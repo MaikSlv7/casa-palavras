@@ -17,7 +17,16 @@
     <span id="progresso">🔎 0 / 0 palavras</span>
   </div>
 
-  <div id="menu-dificuldade">
+  <select id="categoria" onchange="selecionarCategoria()">
+  <option value="">-- Categoria (opcional) --</option>
+  <option value="frutas">Frutas</option>
+  <option value="animais">Animais</option>
+  <option value="cores">Cores</option>
+  <option value="profissoes">Profissões</option>
+  <option value="paises">Países</option>
+</select>
+
+<div id="menu-dificuldade">
     <label><input type="radio" name="nivel" value="facil" checked> Fácil</label>
     <label><input type="radio" name="nivel" value="medio"> Médio</label>
     <label><input type="radio" name="nivel" value="dificil"> Difícil</label>

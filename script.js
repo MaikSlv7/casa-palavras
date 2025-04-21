@@ -235,3 +235,21 @@ function carregarRankingOnline() {
       "</ol>";
   });
 }
+
+
+
+const categorias = {
+  frutas: ["BANANA", "MAÇÃ", "UVA", "LARANJA", "MELANCIA", "MORANGO", "ABACAXI"],
+  animais: ["CACHORRO", "GATO", "ELEFANTE", "LEÃO", "TIGRE", "ZEBRA", "CAVALO"],
+  cores: ["VERMELHO", "AZUL", "AMARELO", "VERDE", "PRETO", "BRANCO", "ROSA"],
+  profissoes: ["MÉDICO", "ENGENHEIRO", "PROFESSOR", "ADVOGADO", "PILOTO", "POLICIAL"],
+  paises: ["BRASIL", "CANADÁ", "ARGENTINA", "ALEMANHA", "ITÁLIA", "JAPÃO", "CHINA"]
+};
+
+function selecionarCategoria() {
+  const cat = document.getElementById("categoria").value;
+  if (categorias[cat]) {
+    palavras = [...categorias[cat]];
+    atualizarListaPalavras();
+  }
+}
