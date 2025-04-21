@@ -94,3 +94,22 @@ button {
   margin: 0 auto;
   display: inline-block;
 }
+/* Layout refinado para separar menu do tabuleiro */
+#container-jogo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  margin-top: 20px;
+  padding: 0 20px;
+}
+#menu-lateral {
+  flex: 1 1 300px;
+  max-width: 400px;
+  text-align: left;
+}
+#tabuleiro-area {
+  flex: 2 1 600px;
+  min-width: 300px;
+}
