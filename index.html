@@ -24,7 +24,8 @@
     <span id="progresso">🔎 0 / 0 palavras</span>
   </div>
 
-  <select id="categoria" onchange="selecionarCategoria()">
+  <div id="menu-lateral">
+    <select id="categoria" onchange="selecionarCategoria()">
     <option value="">-- Categoria (opcional) --</option>
     <option value="frutas">🍎 Frutas</option>
     <option value="animais">🐾 Animais</option>
@@ -52,7 +53,10 @@
   <div id="historico"></div>
   <button onclick="limparHistorico()">🧹 Limpar Histórico</button>
 
-  <div id="word-grid"></div>
+    </div>
+
+  <div id="tabuleiro-area">
+    <div id="word-grid"></div>
 
   <script src="script.js"></script>
 </body>
