@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Caça-Palavras</title>
+  <title>Caça-Palavras Educativo</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -18,15 +18,18 @@
   </div>
 
   <select id="categoria" onchange="selecionarCategoria()">
-  <option value="">-- Categoria (opcional) --</option>
-  <option value="frutas">Frutas</option>
-  <option value="animais">Animais</option>
-  <option value="cores">Cores</option>
-  <option value="profissoes">Profissões</option>
-  <option value="paises">Países</option>
-</select>
+    <option value="">-- Categoria (opcional) --</option>
+    <option value="frutas">Frutas</option>
+    <option value="animais">Animais</option>
+    <option value="cores">Cores</option>
+    <option value="profissoes">Profissões</option>
+    <option value="paises">Países</option>
+    <option value="ortografia">📘 Ortografia</option>
+    <option value="matematica">🧮 Matemática</option>
+    <option value="ingles">🇺🇸 Inglês</option>
+  </select>
 
-<div id="menu-dificuldade">
+  <div id="menu-dificuldade">
     <label><input type="radio" name="nivel" value="facil" checked> Fácil</label>
     <label><input type="radio" name="nivel" value="medio"> Médio</label>
     <label><input type="radio" name="nivel" value="dificil"> Difícil</label>

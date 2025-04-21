@@ -45,7 +45,7 @@ body {
 .letter.selected {
   background-color: #3a6ea5;
   color: #ffffff;
-  border: 2px solid #00ffff;
+  border: 2px solid #66f2ff;
 }
 .letter.found {
   background-color: #7fffd4;
