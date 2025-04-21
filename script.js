@@ -176,7 +176,9 @@ function verificarPalavraSelecionada() {
   if (palavras.includes(palavraFormada) && !palavrasJaEncontradas.has(palavraFormada)) {
     posicoesSelecionadas.forEach(div => div.classList.add("found"));
     palavrasEncontradas++;
-    palavrasJaEncontradas.add(palavraFormada);
+        palavrasJaEncontradas.add(palavraFormada);
+    const el = document.getElementById(`palavra-${palavraFormada}`);
+    if (el) el.classList.add("encontrada");
     pontuacao += pontosPorNivel[nivel];
     atualizarPlacar();
     audioDing.currentTime = 0;
