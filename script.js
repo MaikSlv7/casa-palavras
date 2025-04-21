@@ -31,6 +31,7 @@ function iniciarJogo() {
   gerarTabuleiro();
   atualizarPlacar();
   document.getElementById("menu-lateral").style.display = "none";
+  document.getElementById("botao-reabrir-menu").style.display = "block";
 
   const tempoPorNivel = { facil: 300, medio: 240, dificil: 180 };
   tempoRestante = tempoPorNivel[nivel];
