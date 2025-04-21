@@ -8,6 +8,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <script>
+    function reexibirMenu() {
+      document.getElementById('menu-lateral').style.display = 'block';
+      document.getElementById('botao-reabrir-menu').style.display = 'none';
+    }
+
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('service-worker.js');
@@ -16,47 +21,47 @@
   </script>
 </head>
 <body class="tema-retro">
+  <button id="botao-reabrir-menu" onclick="reexibirMenu()" style="display:none; position:absolute; top:10px; left:10px;">🔧 Opções</button>
+
   <h1>Caça-Palavras</h1>
+  <div id="container-jogo">
+    <div id="menu-lateral">
+      <select id="categoria" onchange="selecionarCategoria()">
+        <option value="">-- Categoria (opcional) --</option>
+        <option value="frutas">🍎 Frutas</option>
+        <option value="animais">🐾 Animais</option>
+        <option value="cores">🎨 Cores</option>
+        <option value="profissoes">👷 Profissões</option>
+        <option value="paises">🌍 Países</option>
+        <option value="ortografia">🔡 Ortografia</option>
+        <option value="matematica">➕ Matemática</option>
+        <option value="ingles">🇬🇧 Inglês</option>
+      </select>
 
-  <button id="botao-reabrir-menu" onclick="document.getElementById('menu-lateral').style.display = 'block'" style="display:none; position:absolute; top:10px; left:10px;">🔧 Opções</button>
-<div id="painel-info">
-    <span id="cronometro">⏱️ 00:00</span>
-    <span id="progresso">🔎 0 / 0 palavras</span>
-  </div>
+      <div id="menu-dificuldade">
+        <label><input type="radio" name="nivel" value="facil" checked> Fácil</label>
+        <label><input type="radio" name="nivel" value="medio"> Médio</label>
+        <label><input type="radio" name="nivel" value="dificil"> Difícil</label>
+      </div>
 
-  <div id="menu-lateral">
-    <select id="categoria" onchange="selecionarCategoria()">
-    <option value="">-- Categoria (opcional) --</option>
-    <option value="frutas">🍎 Frutas</option>
-    <option value="animais">🐾 Animais</option>
-    <option value="cores">🎨 Cores</option>
-    <option value="profissoes">👷 Profissões</option>
-    <option value="paises">🌍 Países</option>
-    <option value="ortografia">🔡 Ortografia</option>
-    <option value="matematica">➕ Matemática</option>
-    <option value="ingles">🇬🇧 Inglês</option>
-  </select>
+      <button onclick="gerarPalavrasAleatorias()">🔁 Gerar Palavras Aleatórias</button><br>
+      <input id="nome-jogador" type="text" maxlength="12" placeholder="Seu nome"><br>
+      <button onclick="iniciarJogo()">Iniciar Jogo</button>
 
-  <div id="menu-dificuldade">
-    <label><input type="radio" name="nivel" value="facil" checked> Fácil</label>
-    <label><input type="radio" name="nivel" value="medio"> Médio</label>
-    <label><input type="radio" name="nivel" value="dificil"> Difícil</label>
-  </div>
-
-  <button onclick="gerarPalavrasAleatorias()">🔁 Gerar Palavras Aleatórias</button><br>
-  <input id="nome-jogador" type="text" maxlength="12" placeholder="Seu nome"><br>
-  <button onclick="iniciarJogo()">Iniciar Jogo</button>
-
-  <div id="lista-palavras">📃 Palavras: <span id="lista-palavras-span"></span></div>
-  <div id="ranking-global"></div>
-  <div id="ranking"></div>
-  <div id="historico"></div>
-  <button onclick="limparHistorico()">🧹 Limpar Histórico</button>
-
+      <div id="lista-palavras">📃 Palavras: <span id="lista-palavras-span"></span></div>
     </div>
 
-  <div id="tabuleiro-area">
-    <div id="word-grid"></div>
+    <div id="tabuleiro-area">
+      <div id="painel-info">
+        <span id="cronometro">⏱️ 00:00</span>
+        <span id="progresso">🔎 0 / 0 palavras</span>
+      </div>
+      <div id="word-grid"></div>
+      <div id="ranking-global"></div>
+      <div id="ranking"></div>
+      <div id="historico"></div>
+      <button onclick="limparHistorico()">🧹 Limpar Histórico</button>
+    </div>
   </div>
 
   <script src="script.js"></script>
