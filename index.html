@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Caça-Palavras por Dificuldade</title>
+  <title>Caça-Palavras Online</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 </head>
 <body class="tema-retro">
   <h1>Caça-Palavras</h1>
@@ -24,12 +26,11 @@
   <button onclick="iniciarJogo()">Iniciar Jogo</button>
 
   <div id="lista-palavras">📃 Palavras: <span id="lista-palavras-span"></span></div>
+  <div id="ranking-global"></div>
+  <div id="ranking"></div>
+  <div id="historico"></div>
+  <button onclick="limparHistorico()">🧹 Limpar Histórico</button>
 
-  <div id="painel-extra">
-    <div id="ranking"></div>
-    <div id="historico"></div>
-    <button onclick="limparHistorico()">🧹 Limpar Histórico</button>
-  </div>
   <div id="word-grid"></div>
 
   <script src="script.js"></script>

@@ -72,7 +72,6 @@ button {
   margin: 10px;
   cursor: pointer;
 }
-
 #lista-palavras {
   font-size: 0.6rem;
   margin: 10px auto;
@@ -84,26 +83,14 @@ button {
   text-decoration: line-through;
   color: #888;
 }
-
-#painel-extra {
+#ranking, #historico, #ranking-global {
   margin-top: 10px;
   font-size: 0.6rem;
-  color: #0ff;
-  max-width: 90vw;
-  margin-left: auto;
-  margin-right: auto;
+  text-align: center;
 }
-#ranking, #historico {
-  margin-top: 10px;
+#ranking-global ol {
+  padding-left: 1.2rem;
   text-align: left;
-}
-#historico ul {
-  padding-left: 15px;
-}
-.novo-recorde {
-  animation: flash 0.3s alternate 5;
-}
-@keyframes flash {
-  0% { background-color: black; }
-  100% { background-color: #002244; }
+  margin: 0 auto;
+  display: inline-block;
 }
