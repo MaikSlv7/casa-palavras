@@ -1,115 +1,49 @@
 
 body {
+  font-family: sans-serif;
   margin: 0;
-  font-family: 'Press Start 2P', cursive;
-  text-align: center;
-  background-color: #1a1a1a;
-  color: #b2fefa;
+  padding: 20px;
+  background-color: #111;
+  color: #fff;
 }
-#painel-info {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  font-size: 0.8rem;
-  margin-bottom: 10px;
-}
-#word-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  max-width: 95vw;
-  width: 100%;
-  gap: 5px;
-  justify-content: center;
-  margin-top: 20px;
-  padding: 0 10px;
-}
-#word-grid.grid-16 {
-  grid-template-columns: repeat(16, 1fr);
-  max-width: 800px;
-}
-.letter {
-  aspect-ratio: 1/1;
-  border: 2px solid #66f2ff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #1a1a1a;
-  color: #b2fefa;
-  cursor: pointer;
-  font-weight: bold;
-  user-select: none;
-  font-size: clamp(5px, 1.2vw, 12px);
-  padding: 2px;
-  transition: background 0.2s, color 0.2s, border 0.2s;
-}
-.letter.selected {
-  background-color: #3a6ea5;
-  color: #ffffff;
-  border: 2px solid #66f2ff;
-}
-.letter.found {
-  background-color: #7fffd4;
-  color: black;
-  border-color: #7fffd4;
-}
-#menu-dificuldade {
-  margin-top: 15px;
-}
-#menu-dificuldade label {
-  margin: 0 10px;
-  font-size: 0.8rem;
-}
-#menu-dificuldade input[type="radio"] {
-  transform: scale(1.5);
-  margin-right: 5px;
-}
-button {
-  font-family: 'Press Start 2P', cursive;
-  background: #0ff;
-  color: black;
-  border: none;
-  padding: 10px 15px;
-  margin: 10px;
-  cursor: pointer;
-}
-#lista-palavras {
-  font-size: 0.6rem;
-  margin: 10px auto;
-  max-width: 90vw;
-  color: #b2fefa;
-  word-wrap: break-word;
-}
-#lista-palavras-span .encontrada {
-  text-decoration: line-through;
-  color: #888;
-}
-#ranking, #historico, #ranking-global {
-  margin-top: 10px;
-  font-size: 0.6rem;
-  text-align: center;
-}
-#ranking-global ol {
-  padding-left: 1.2rem;
-  text-align: left;
-  margin: 0 auto;
-  display: inline-block;
-}
-/* Layout refinado para separar menu do tabuleiro */
 #container-jogo {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 30px;
-  margin-top: 20px;
-  padding: 0 20px;
+  gap: 20px;
 }
 #menu-lateral {
-  flex: 1 1 300px;
-  max-width: 400px;
-  text-align: left;
+  background: #222;
+  padding: 10px;
+  width: 250px;
 }
 #tabuleiro-area {
-  flex: 2 1 600px;
-  min-width: 300px;
+  flex-grow: 1;
+}
+#word-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 40px);
+  gap: 5px;
+}
+.letter {
+  width: 40px;
+  height: 40px;
+  background: #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+#botao-reabrir-menu {
+  display: none;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  padding: 10px;
+  background: #0ff;
+  color: black;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1000;
 }
