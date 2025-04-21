@@ -3,11 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Caça-Palavras Educativo</title>
+  <title>Caça-Palavras</title>
+  <link rel="manifest" href="/casa-palavras/manifest.json">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js');
+      });
+    }
+  </script>
 </head>
 <body class="tema-retro">
   <h1>Caça-Palavras</h1>
@@ -18,7 +24,6 @@
   </div>
 
   <select id="categoria" onchange="selecionarCategoria()">
-
     <option value="">-- Categoria (opcional) --</option>
     <option value="frutas">🍎 Frutas</option>
     <option value="animais">🐾 Animais</option>
