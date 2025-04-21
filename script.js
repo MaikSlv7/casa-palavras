@@ -9,6 +9,8 @@ let pontuacao = 0;
 
 const audioClick = new Audio('click.wav');
 const audioDing = new Audio('ding.wav');
+const audioErro = new Audio('erro.wav');
+const audioTempo = new Audio('tempo.wav');
 
 function iniciarJogo() {
   const nivel = document.querySelector('input[name=nivel]:checked').value;
@@ -48,6 +50,8 @@ function iniciarJogo() {
     tempoRestante--;
     atualizarCronometro();
     if (tempoRestante <= 0) {
+    audioTempo.currentTime = 0;
+    audioTempo.play();
       encerrarJogo(nivel);
     }
   }, 1000);
@@ -182,6 +186,8 @@ function verificarPalavraSelecionada() {
     }
   } else {
     posicoesSelecionadas.forEach(div => div.classList.remove("selected"));
+    audioErro.currentTime = 0;
+    audioErro.play();
   }
   selecaoAtual = "";
   posicoesSelecionadas = [];
