@@ -50,8 +50,42 @@ function gerarTabuleiroPorFase(fase) {
     const div = document.createElement("div");
     div.className = "letter";
     div.textContent = letras[Math.floor(Math.random() * letras.length)];
-    grid.appendChild(div);
+    div.setAttribute("onmousedown", "iniciarSelecao(event, this.textContent, '')");
+div.setAttribute("onmouseover", "continuarSelecao(event, this.textContent, '')");
+div.setAttribute("onmouseup", "finalizarSelecao()");
+div.setAttribute("ontouchstart", "iniciarSelecao(event, this.textContent, '')");
+div.setAttribute("ontouchmove", "continuarSelecao(event, this.textContent, '')");
+div.setAttribute("ontouchend", "finalizarSelecao()");
+grid.appendChild(div);
   }
 
   setTimeout(() => concluirFase(), 3000);
+}
+
+
+let selecionando = false;
+let selecaoAtual = "";
+let posicoesSelecionadas = [];
+
+function iniciarSelecao(event, letra, pos) {
+  selecionando = true;
+  selecaoAtual = letra;
+  posicoesSelecionadas = [pos];
+  event.target.classList.add("selected");
+}
+
+function continuarSelecao(event, letra, pos) {
+  if (!selecionando) return;
+  if (!posicoesSelecionadas.includes(pos)) {
+    selecaoAtual += letra;
+    posicoesSelecionadas.push(pos);
+    event.target.classList.add("selected");
+  }
+}
+
+function finalizarSelecao() {
+  selecionando = false;
+  selecaoAtual = "";
+  posicoesSelecionadas = [];
+  document.querySelectorAll(".letter.selected").forEach(el => el.classList.remove("selected"));
 }

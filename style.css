@@ -55,3 +55,15 @@ body {
   cursor: pointer;
   z-index: 1000;
 }
+
+
+.letter {
+  aspect-ratio: 1 / 1;
+  font-size: 14px;
+  user-select: none;
+  transition: background 0.2s ease;
+}
+.letter.selected {
+  background-color: #0ff;
+  color: #000;
+}
