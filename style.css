@@ -29,7 +29,7 @@ body {
 }
 #word-grid {
   display: grid;
-  grid-template-columns: repeat(12, 40px);
+  grid-template-columns: repeat(10, 40px);
   gap: 5px;
 }
 .letter {

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Caça-Palavras</title>
+  <title>Caça-Palavras por Fases</title>
   <link rel="stylesheet" href="style.css" />
   <script>
     function reexibirMenu() {
@@ -14,6 +14,7 @@
 </head>
 <body>
   <button id="botao-reabrir-menu" onclick="reexibirMenu()">🔧 Opções</button>
+  <div id="fase-atual" style="margin: 10px 0; font-weight: bold;">🗂️ Fase 1 - Fácil</div>
   <div id="container-jogo">
     <div id="menu-lateral">
       <h3>Menu</h3>
@@ -21,6 +22,7 @@
     </div>
     <div id="tabuleiro-area">
       <div id="word-grid"></div>
+      <button onclick="avancarFase()">▶️ Próxima Fase</button>
     </div>
   </div>
   <script src="script.js"></script>
