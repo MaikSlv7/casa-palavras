@@ -59,7 +59,7 @@ div.setAttribute("ontouchend", "finalizarSelecao()");
 grid.appendChild(div);
   }
 
-  setTimeout(() => concluirFase(), 3000);
+  
 }
 
 
@@ -83,9 +83,35 @@ function continuarSelecao(event, letra, pos) {
   }
 }
 
-function finalizarSelecao() {
+function finalizarSelecao()
+{
+  verificarPalavra(); {
   selecionando = false;
   selecaoAtual = "";
   posicoesSelecionadas = [];
   document.querySelectorAll(".letter.selected").forEach(el => el.classList.remove("selected"));
+}
+
+
+let palavrasEncontradas = [];
+let selecaoAtual = "";
+let posicoesSelecionadas = [];
+let selecionando = false;
+
+function verificarPalavra() {
+  const tema = temasPorFase[(faseAtual - 1) % temasPorFase.length];
+  const palavras = tema.palavras.map(p => p.toUpperCase());
+
+  if (palavras.includes(selecaoAtual)) {
+    palavrasEncontradas.push(selecaoAtual);
+    document.querySelectorAll(".letter.selected").forEach(el => el.classList.add("found"));
+    if (palavrasEncontradas.length >= palavras.length) {
+      setTimeout(() => concluirFase(), 500);
+    }
+  }
+
+  // Limpa seleção
+  document.querySelectorAll(".letter.selected").forEach(el => el.classList.remove("selected"));
+  selecaoAtual = "";
+  posicoesSelecionadas = [];
 }
