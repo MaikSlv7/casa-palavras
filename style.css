@@ -1,40 +1,76 @@
 
-body {
-  font-family: sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body.tema-retro {
+  font-family: 'Press Start 2P', cursive;
   background-color: #111;
-  color: #fff;
+  color: #00ffff;
   margin: 0;
-  padding: 20px;
+  padding: 0;
 }
+
 #container-jogo {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  flex-direction: row;
+  height: 100vh;
+  overflow: hidden;
 }
+
 #menu-lateral {
-  background: #222;
-  padding: 10px;
-  width: 250px;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  opacity: 1;
-  transform: translateX(0);
+  background-color: #222;
+  padding: 20px;
+  width: 300px;
+  overflow-y: auto;
+  transition: all 0.3s ease;
 }
+
 #menu-lateral.oculto {
-  opacity: 0;
-  transform: translateX(-30px);
-  pointer-events: none;
+  transform: translateX(-100%);
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 300px;
+  z-index: 1000;
 }
+
+#botao-reabrir-menu, #botao-fechar-menu {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  padding: 10px;
+  background: #0ff;
+  color: #000;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 2000;
+  font-family: 'Press Start 2P', cursive;
+}
+
+#botao-fechar-menu {
+  left: auto;
+  right: 10px;
+}
+
 #tabuleiro-area {
-  flex-grow: 1;
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+
 #word-grid {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
   gap: 5px;
+  max-width: 100%;
 }
+
 .letter {
   aspect-ratio: 1 / 1;
-  font-size: 14px;
+  font-size: 12px;
   background: #444;
   display: flex;
   align-items: center;
@@ -43,32 +79,51 @@ body {
   cursor: pointer;
   user-select: none;
   transition: background 0.2s ease;
+  color: #0ff;
 }
+
 .letter.selected {
   background-color: #0ff;
   color: #000;
 }
+
 .letter.found {
   background-color: #0a0;
   color: #fff;
 }
-#botao-reabrir-menu {
+
+#lista-palavras-overlay {
   display: none;
-  position: fixed;
+  position: absolute;
   top: 10px;
-  left: 10px;
-  padding: 10px;
-  background: #0ff;
-  color: black;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 1000;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 10px;
+  font-family: 'Press Start 2P', cursive;
+  z-index: 1500;
+  border-radius: 6px;
 }
 
+@media (max-width: 768px) {
+  #menu-lateral {
+    position: absolute;
+    z-index: 1500;
+    height: 100vh;
+  }
 
-.tema-retro {
-  font-family: 'Press Start 2P', cursive;
-  background-color: #111;
-  color: #00ffff;
+  #lista-palavras-overlay {
+    display: block;
+  }
+
+  #word-grid {
+    width: 95vw;
+    grid-template-columns: repeat(10, 1fr);
+  }
+
+  .letter {
+    font-size: 8px;
+  }
 }

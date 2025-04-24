@@ -13,12 +13,17 @@
   </script>
 </head>
 <body class="tema-retro">
+  <button id="botao-reabrir-menu" onclick="document.getElementById('menu-lateral').classList.remove('oculto'); this.style.display='none';">🔧 Opções</button>
+  <div id="lista-palavras-overlay"><span id="lista-palavras-span-overlay"></span></div>
+
   <button id="botao-reabrir-menu" onclick="reexibirMenu()">🔧 Opções</button>
 
   <div id="fase-atual" style="margin: 10px 0; font-weight: bold;">🗂️ Fase 1 - Tema: Frutas</div>
 
   <div id="container-jogo">
     <div id="menu-lateral">
+  <button id="botao-fechar-menu" onclick="document.getElementById('menu-lateral').classList.add('oculto'); document.getElementById('botao-reabrir-menu').style.display='block';">⬅️ Fechar</button>
+
       <h3>Menu</h3>
 
       <label for="nome-jogador">👤 Nome:</label><br>
