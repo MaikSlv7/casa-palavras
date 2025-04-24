@@ -29,18 +29,28 @@ body {
 }
 #word-grid {
   display: grid;
-  grid-template-columns: repeat(10, 40px);
+  grid-template-columns: repeat(10, 1fr);
   gap: 5px;
 }
 .letter {
-  width: 40px;
-  height: 40px;
+  aspect-ratio: 1 / 1;
+  font-size: 14px;
   background: #444;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
   cursor: pointer;
+  user-select: none;
+  transition: background 0.2s ease;
+}
+.letter.selected {
+  background-color: #0ff;
+  color: #000;
+}
+.letter.found {
+  background-color: #0a0;
+  color: #fff;
 }
 #botao-reabrir-menu {
   display: none;
@@ -54,16 +64,4 @@ body {
   font-weight: bold;
   cursor: pointer;
   z-index: 1000;
-}
-
-
-.letter {
-  aspect-ratio: 1 / 1;
-  font-size: 14px;
-  user-select: none;
-  transition: background 0.2s ease;
-}
-.letter.selected {
-  background-color: #0ff;
-  color: #000;
 }
