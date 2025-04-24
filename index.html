@@ -13,57 +13,40 @@
   </script>
 </head>
 <body class="tema-retro">
-  <button id="botao-reabrir-menu" onclick="document.getElementById('menu-lateral').classList.remove('oculto'); this.style.display='none';">🔧 Opções</button>
-  <div id="lista-palavras-overlay"><span id="lista-palavras-span-overlay"></span></div>
-
   <button id="botao-reabrir-menu" onclick="reexibirMenu()">🔧 Opções</button>
-
-  <div id="fase-atual" style="margin: 10px 0; font-weight: bold;">🗂️ Fase 1 - Tema: Frutas</div>
-
+  <div id="lista-palavras-overlay"><span id="lista-palavras-span-overlay"></span></div>
+  <div id="fase-atual" style="margin: 10px 0; font-weight: bold;">🗂️ Caça-Palavras</div>
   <div id="container-jogo">
     <div id="menu-lateral">
-  <button id="botao-fechar-menu" onclick="document.getElementById('menu-lateral').classList.add('oculto'); document.getElementById('botao-reabrir-menu').style.display='block';">⬅️ Fechar</button>
-
+      <button id="botao-fechar-menu" onclick="document.getElementById('menu-lateral').classList.add('oculto'); document.getElementById('botao-reabrir-menu').style.display='block';">⬅️ Fechar</button>
       <h3>Menu</h3>
-
-      <label for="nome-jogador">👤 Nome:</label><br>
-      <input id="nome-jogador" type="text" placeholder="Digite seu nome"><br><br>
-
-      <label for="categoria">📂 Categoria:</label><br>
-      <select id="categoria">
-        <option value="">Aleatória</option>
-        <option value="frutas">Frutas</option>
-        <option value="animais">Animais</option>
-        <option value="cores">Cores</option>
-        <option value="profissoes">Profissões</option>
-        <option value="paises">Países</option>
-      </select><br><br>
-
-      <label for="nivel">🎯 Dificuldade:</label><br>
-      <label><input type="radio" name="nivel" value="facil" checked> Fácil</label><br>
-      <label><input type="radio" name="nivel" value="medio"> Médio</label><br>
-      <label><input type="radio" name="nivel" value="dificil"> Difícil</label><br><br>
-
+      <label>👤 Nome:<br><input id="nome-jogador" type="text" placeholder="Digite seu nome"></label><br><br>
+      <label>📂 Categoria:<br>
+        <select id="categoria" onchange="selecionarCategoria()">
+          <option value="">Aleatória</option>
+          <option value="frutas">Frutas</option>
+          <option value="animais">Animais</option>
+          <option value="cores">Cores</option>
+          <option value="profissoes">Profissões</option>
+          <option value="paises">Países</option>
+        </select>
+      </label><br><br>
+      <label>🎯 Dificuldade:<br>
+        <label><input type="radio" name="nivel" value="facil" checked> Fácil</label><br>
+        <label><input type="radio" name="nivel" value="medio"> Médio</label><br>
+        <label><input type="radio" name="nivel" value="dificil"> Difícil</label>
+      </label><br><br>
       <button onclick="gerarPalavrasAleatorias()">🔁 Gerar Palavras Aleatórias</button><br><br>
       <button onclick="iniciarJogo()">▶️ Iniciar Jogo</button><br><br>
-
       <div id="lista-palavras">📋 Palavras: <span id="lista-palavras-span"></span></div><br>
     </div>
-
     <div id="tabuleiro-area">
       <div id="painel-info">
-        <span id="cronometro">⏱️ 00:00</span> |
-        <span id="progresso">🔎 0 / 0</span>
+        <span id="cronometro">⏱️ 00:00</span> | <span id="progresso">🔎 0 / 0</span>
       </div>
       <div id="word-grid"></div>
     </div>
   </div>
-
-  <div id="tela-transicao" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:#000c; color:white; font-size:1.2rem; justify-content:center; align-items:center; flex-direction:column; z-index:2000;">
-    <div id="texto-transicao" style="margin-bottom:20px;"></div>
-    <button onclick="avancarFase()" style="padding:10px 20px; font-size:1rem;">▶️ Avançar</button>
-  </div>
-
   <script src="script.js"></script>
 </body>
 </html>
