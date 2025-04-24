@@ -79,3 +79,40 @@ body.tema-retro {
   font-family: 'Press Start 2P', cursive;
   z-index: 1000;
 }
+
+/* Botão reabrir menor e mais discreto */
+#botao-reabrir-menu {
+  top: 8px;
+  left: 8px;
+  font-size: 10px;
+  padding: 6px 10px;
+  background: #0ff;
+  border-radius: 4px;
+  z-index: 1001;
+}
+
+/* Ajuste do menu lateral para não aparecer cortado */
+#menu-lateral {
+  width: 280px;
+  max-height: 100vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  z-index: 1000;
+}
+
+/* Evita que o menu corte ou empurre o tabuleiro */
+#container-jogo {
+  flex-direction: row;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Lista de palavras mais próxima ao tabuleiro */
+#lista-palavras-overlay {
+  top: 5px;
+  font-size: 10px;
+  padding: 6px 12px;
+  background: rgba(0,0,0,0.7);
+  border-radius: 6px;
+  z-index: 1500;
+}
