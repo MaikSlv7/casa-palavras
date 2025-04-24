@@ -65,3 +65,10 @@ body {
   cursor: pointer;
   z-index: 1000;
 }
+
+
+.tema-retro {
+  font-family: 'Press Start 2P', cursive;
+  background-color: #111;
+  color: #00ffff;
+}
