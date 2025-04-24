@@ -9,10 +9,11 @@
 <body class="tema-retro">
   <div id="lista-palavras-overlay"><span id="lista-palavras-span-overlay"></span></div>
   <div id="container-jogo">
-    <div id="menu-lateral">
-      <button onclick="document.getElementById('menu-lateral').classList.add('oculto'); document.getElementById('botao-reabrir-menu').style.display='block';">⬅️ Fechar</button>
+    <div id="menu-lateral" class="oculto">
+      <button id="botao-fechar-menu" onclick="fecharMenu()">⬅️ Fechar</button>
       <h3>Menu</h3>
-      <label>Categoria:<br>
+      <label>👤 Nome:<br><input id="nome-jogador" type="text" placeholder="Digite seu nome"></label><br><br>
+      <label>📂 Categoria:<br>
         <select id="categoria" onchange="selecionarCategoria()">
           <option value="">Aleatória</option>
           <option value="frutas">Frutas</option>
@@ -20,14 +21,23 @@
           <option value="cores">Cores</option>
         </select>
       </label><br><br>
-      <button onclick="iniciarJogo()">Iniciar Jogo</button><br><br>
-      <div>Palavras: <span id="lista-palavras-span"></span></div>
+      <label>🎯 Dificuldade:<br>
+        <label><input type="radio" name="nivel" value="facil" checked> Fácil</label><br>
+        <label><input type="radio" name="nivel" value="medio"> Médio</label><br>
+        <label><input type="radio" name="nivel" value="dificil"> Difícil</label>
+      </label><br><br>
+      <button onclick="gerarPalavrasAleatorias()">🔁 Gerar Palavras Aleatórias</button><br><br>
+      <button onclick="iniciarJogo()">▶️ Iniciar Jogo</button><br><br>
+      <div>📋 Palavras: <span id="lista-palavras-span"></span></div>
     </div>
     <div id="tabuleiro-area">
+      <div id="painel-info">
+        <span id="cronometro">⏱️ 00:00</span> | <span id="progresso">🔎 0 / 0</span>
+      </div>
       <div id="word-grid"></div>
     </div>
   </div>
-  <button id="botao-reabrir-menu" onclick="document.getElementById('menu-lateral').classList.remove('oculto'); this.style.display='none';">🔧 Opções</button>
+  <button id="botao-reabrir-menu" onclick="reexibirMenu()">🔧</button>
   <script src="script.js"></script>
 </body>
 </html>

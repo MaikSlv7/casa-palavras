@@ -1,6 +1,5 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
 body.tema-retro {
   font-family: 'Press Start 2P', cursive;
   background-color: #111;
@@ -9,114 +8,26 @@ body.tema-retro {
   padding: 0;
   overflow: hidden;
 }
-
 #container-jogo {
   display: flex;
   height: 100vh;
-  overflow: hidden;
 }
-
 #menu-lateral {
   width: 280px;
   background: #222;
   padding: 20px;
   overflow-y: auto;
-}
-
-#menu-lateral.oculto {
-  display: none;
-}
-
-#botao-reabrir-menu {
   position: fixed;
-  top: 10px;
-  left: 10px;
-  z-index: 1000;
-  background: #0ff;
-  color: #000;
-  padding: 10px;
-  border: none;
-  font-family: 'Press Start 2P', cursive;
-}
-
-#tabuleiro-area {
-  flex: 1;
-  position: relative;
-  padding-top: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#word-grid {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  gap: 5px;
-  max-width: 90vw;
-}
-
-.letter {
-  background: #444;
-  color: #0ff;
-  font-size: 12px;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#lista-palavras-overlay {
-  position: fixed;
-  top: 0;
   left: 0;
-  width: 100%;
-  background: rgba(0,0,0,0.85);
-  color: #0ff;
-  padding: 10px;
-  text-align: center;
-  font-size: 9px;
-  font-family: 'Press Start 2P', cursive;
-  z-index: 1000;
-}
-
-/* Botão reabrir menor e mais discreto */
-#botao-reabrir-menu {
-  top: 8px;
-  left: 8px;
-  font-size: 10px;
-  padding: 6px 10px;
-  background: #0ff;
-  border-radius: 4px;
-  z-index: 1001;
-}
-
-/* Ajuste do menu lateral para não aparecer cortado */
-#menu-lateral {
-  width: 280px;
-  max-height: 100vh;
-  overflow-y: auto;
-  box-sizing: border-box;
-  z-index: 1000;
-}
-
-/* Evita que o menu corte ou empurre o tabuleiro */
-#container-jogo {
-  flex-direction: row;
+  top: 0;
   height: 100vh;
-  overflow: hidden;
+  transform: translateX(0);
+  z-index: 2000;
+  transition: transform 0.3s ease;
 }
-
-/* Lista de palavras mais próxima ao tabuleiro */
-#lista-palavras-overlay {
-  top: 5px;
-  font-size: 10px;
-  padding: 6px 12px;
-  background: rgba(0,0,0,0.7);
-  border-radius: 6px;
-  z-index: 1500;
+#menu-lateral.oculto {
+  transform: translateX(-100%);
 }
-
 #botao-reabrir-menu {
   position: fixed;
   bottom: 10px;
@@ -126,22 +37,55 @@ body.tema-retro {
   background: #0ff;
   border-radius: 6px;
   z-index: 1001;
+  font-family: 'Press Start 2P', cursive;
 }
-
-/* Menu lateral sobrepondo tabuleiro */
-#menu-lateral {
+#tabuleiro-area {
+  flex: 1;
+  padding-top: 60px;
+  padding-left: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  box-sizing: border-box;
+}
+#word-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 5px;
+  justify-content: center;
+}
+.letter {
+  background: #444;
+  color: #0ff;
+  font-size: 12px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  cursor: pointer;
+}
+.letter.selected {
+  background-color: #0ff;
+  color: #000;
+}
+.letter.found {
+  background-color: #0a0;
+  color: #fff;
+}
+#lista-palavras-overlay {
   position: fixed;
-  top: 0;
+  top: 5px;
   left: 0;
-  height: 100vh;
-  width: 280px;
-  background: #222;
-  padding: 20px;
-  overflow-y: auto;
-  z-index: 2000;
-  transition: transform 0.3s ease;
-}
-
-#menu-lateral.oculto {
-  transform: translateX(-100%);
+  width: 100%;
+  padding: 6px 12px;
+  background: rgba(0,0,0,0.8);
+  color: #0ff;
+  font-size: 10px;
+  text-align: center;
+  font-family: 'Press Start 2P', cursive;
+  z-index: 1500;
+  box-sizing: border-box;
 }
