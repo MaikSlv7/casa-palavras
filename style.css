@@ -7,63 +7,62 @@ body.tema-retro {
   color: #0ff;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
-#lista-palavras-overlay {
+#container-jogo {
   display: flex;
-  justify-content: center;
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,0.7);
-  color: #0ff;
-  padding: 6px 14px;
-  font-size: 9px;
-  font-family: 'Press Start 2P', cursive;
-  z-index: 1500;
-  border-radius: 6px;
-  max-width: 90%;
-  text-align: center;
-  word-break: break-word;
+  height: 100vh;
+  overflow: hidden;
 }
 
-#tabuleiro-area {
-  flex: 1;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding-top: 60px;
-  box-sizing: border-box;
-}
-#word-grid {
-  display: grid;
-  gap: 5px;
-  max-width: 100%;
-  justify-content: center;
-}
-
-#tabuleiro-area {
-  flex: 1;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding-top: 80px;
-  padding-bottom: 20px;
-  box-sizing: border-box;
+#menu-lateral {
+  width: 280px;
+  background: #222;
+  padding: 20px;
   overflow-y: auto;
+}
+
+#menu-lateral.oculto {
+  display: none;
+}
+
+#botao-reabrir-menu {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+  background: #0ff;
+  color: #000;
+  padding: 10px;
+  border: none;
+  font-family: 'Press Start 2P', cursive;
+}
+
+#tabuleiro-area {
+  flex: 1;
+  position: relative;
+  padding-top: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #word-grid {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   gap: 5px;
-  width: auto;
   max-width: 90vw;
+}
+
+.letter {
+  background: #444;
+  color: #0ff;
+  font-size: 12px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 
@@ -72,12 +71,11 @@ body.tema-retro {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 8px 16px;
+  background: rgba(0,0,0,0.85);
+  color: #0ff;
+  padding: 10px;
   text-align: center;
-  background: rgba(0,0,0,0.8);
-  color: #00ffff;
-  font-family: 'Press Start 2P', cursive;
   font-size: 9px;
-  z-index: 1500;
-  box-sizing: border-box;
+  font-family: 'Press Start 2P', cursive;
+  z-index: 1000;
 }
