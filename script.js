@@ -123,3 +123,47 @@ function fecharMenu() {
 }
 
 document.getElementById("botao-iniciar").addEventListener("click", iniciarJogo);
+
+// Funções de geração de grade e inserção de palavras
+
+function gerarGrade(linhas, colunas, palavras) {
+  let grade = Array.from({ length: linhas }, () => Array(colunas).fill(""));
+  palavras.forEach(palavra => {
+    let colocado = false;
+    for (let tentativa = 0; tentativa < 100 && !colocado; tentativa++) {
+      const horizontal = Math.random() > 0.5;
+      const maxX = horizontal ? linhas : linhas - palavra.length;
+      const maxY = horizontal ? colunas - palavra.length : colunas;
+      const x = Math.floor(Math.random() * maxX);
+      const y = Math.floor(Math.random() * maxY);
+      let podeColocar = true;
+      for (let i = 0; i < palavra.length; i++) {
+        const nx = x + (horizontal ? 0 : i);
+        const ny = y + (horizontal ? i : 0);
+        if (grade[nx][ny] !== "" && grade[nx][ny] !== palavra[i]) {
+          podeColocar = false;
+          break;
+        }
+      }
+      if (podeColocar) {
+        for (let i = 0; i < palavra.length; i++) {
+          const nx = x + (horizontal ? 0 : i);
+          const ny = y + (horizontal ? i : 0);
+          grade[nx][ny] = palavra[i];
+        }
+        colocado = true;
+      }
+    }
+  });
+
+  const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  for (let i = 0; i < linhas; i++) {
+    for (let j = 0; j < colunas; j++) {
+      if (grade[i][j] === "") {
+        grade[i][j] = letras[Math.floor(Math.random() * letras.length)];
+      }
+    }
+  }
+
+  return grade;
+}
