@@ -167,3 +167,25 @@ function gerarGrade(linhas, colunas, palavras) {
 
   return grade;
 }
+
+
+function desenharTabuleiro(grade) {
+  const tabuleiro = document.getElementById("tabuleiro");
+  tabuleiro.innerHTML = "";
+  for (let i = 0; i < grade.length; i++) {
+    for (let j = 0; j < grade[i].length; j++) {
+      const cel = document.createElement("div");
+      cel.className = "letra";
+      cel.textContent = grade[i][j];
+      cel.dataset.x = i;
+      cel.dataset.y = j;
+      tabuleiro.appendChild(cel);
+    }
+  }
+}
+
+function iniciarJogo() {
+  const palavrasSelecionadas = ["LUZ", "PAZ", "VIDA", "FORCA", "ENERGIA"];
+  const grade = gerarGrade(12, 12, palavrasSelecionadas);
+  desenharTabuleiro(grade);
+}
