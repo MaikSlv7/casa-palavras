@@ -1,4 +1,3 @@
-
 let palavras = [];
 let palavrasEncontradas = [];
 let selecionando = false;
@@ -122,3 +121,5 @@ function fecharMenu() {
   document.getElementById("menu-lateral").classList.add("oculto");
   document.getElementById("botao-reabrir-menu").style.display = "block";
 }
+
+document.getElementById("botao-iniciar").addEventListener("click", iniciarJogo);
