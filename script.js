@@ -11,44 +11,18 @@ const categorias = {
   cores: ["AZUL", "VERMELHO", "VERDE", "AMARELO"]
 };
 
-window.selecionarCategoria = function() {
-  const categoria = document.getElementById("categoria").value;
-  palavras = categoria && categorias[categoria] ? [...categorias[categoria]] :
-    Object.values(categorias).flat().sort(() => 0.5 - Math.random()).slice(0, 5);
-  atualizarListaPalavras();
-}
-
-window.gerarPalavrasAleatorias = function() {
-  palavras = Object.values(categorias).flat().sort(() => 0.5 - Math.random()).slice(0, 5);
-  atualizarListaPalavras();
-}
-
-function atualizarListaPalavras() {
-  const texto = palavras.join(" - ");
-  document.getElementById("lista-palavras-span").textContent = texto;
-  document.getElementById("lista-palavras-span-overlay").textContent = texto;
-}
 
 window.iniciarJogo = function() {
   const grid = document.getElementById("word-grid");
   if (!grid) { console.error("Elemento #word-grid não encontrado."); return; }
-  let grid = document.getElementById("word-grid");
-  if (!grid) { console.error("Elemento #word-grid não encontrado."); return; }
-if (!palavras || palavras.length === 0) {
-    palavras = Object.values(categorias).flat().sort(() => 0.5 - Math.random()).slice(0, 5);
-  }
-   document.getElementById("word-grid");
+
   const nivel = document.querySelector('input[name="nivel"]:checked').value;
   const tamanho = nivel === "facil" ? 10 : nivel === "medio" ? 12 : 16;
-  const total = tamanho * tamanho;
   const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
   palavrasEncontradas = [];
   atualizarPlacar();
-
   grid.innerHTML = "";
   grid.style.gridTemplateColumns = `repeat(${tamanho}, 1fr)`;
-
   const linhas = tamanho;
   const colunas = tamanho;
   const grade = gerarGrade(linhas, colunas, palavras);
@@ -69,202 +43,27 @@ if (!palavras || palavras.length === 0) {
   }
 
   iniciarCronometro(nivel);
-}
+};
 
-function iniciarCronometro(nivel) {
-  clearInterval(intervalo);
-  tempoRestante = nivel === "facil" ? 300 : nivel === "medio" ? 240 : 180;
-  atualizarCronometro();
-  intervalo = setInterval(() => {
-    tempoRestante--;
-    atualizarCronometro();
-    if (tempoRestante <= 0) {
-      clearInterval(intervalo);
-      alert("⏰ Tempo esgotado!");
-    }
-  }, 1000);
-}
+window.gerarPalavrasAleatorias = function() {
+  palavras = Object.values(categorias).flat().sort(() => 0.5 - Math.random()).slice(0, 5);
+  atualizarListaPalavras();
+};
 
-function atualizarCronometro() {
-  const min = String(Math.floor(tempoRestante / 60)).padStart(2, '0');
-  const sec = String(tempoRestante % 60).padStart(2, '0');
-  document.getElementById("cronometro").textContent = `⏱️ ${min}:${sec}`;
-}
+window.selecionarCategoria = function() {
+  const categoria = document.getElementById("categoria").value;
+  palavras = categoria && categorias[categoria] ? [...categorias[categoria]] :
+    Object.values(categorias).flat().sort(() => 0.5 - Math.random()).slice(0, 5);
+  atualizarListaPalavras();
+};
 
-function atualizarPlacar() {
-  document.getElementById("progresso").textContent = `🔎 ${palavrasEncontradas.length} / ${palavras.length}`;
-}
-
-function iniciarSelecao(event, el) {
-  selecionando = true;
-  selecaoAtual = el.textContent;
-  el.classList.add("selected");
-}
-
-function continuarSelecao(event, el) {
-  if (selecionando) {
-    selecaoAtual += el.textContent;
-    el.classList.add("selected");
-  }
-}
-
-function finalizarSelecao() {
-  const palavra = selecaoAtual.toUpperCase();
-  if (palavras.includes(palavra) && !palavrasEncontradas.includes(palavra)) {
-    palavrasEncontradas.push(palavra);
-    document.querySelectorAll(".letter.selected").forEach(el => el.classList.add("found"));
-    atualizarPlacar();
-    if (palavrasEncontradas.length === palavras.length) {
-      clearInterval(intervalo);
-      alert("🎉 Você encontrou todas as palavras!");
-    }
-  }
-  document.querySelectorAll(".letter.selected").forEach(el => el.classList.remove("selected"));
-  selecionando = false;
-  selecaoAtual = "";
-}
+window.fecharMenu = function() {
+  document.getElementById("menu-lateral").classList.add("oculto");
+  document.getElementById("botao-reabrir-menu").style.display = "block";
+};
 
 window.reexibirMenu = function() {
   document.getElementById("menu-lateral").classList.remove("oculto");
   document.getElementById("botao-reabrir-menu").style.display = "none";
   clearInterval(intervalo);
-}
-
-window.fecharMenu = function() {
-  document.getElementById("menu-lateral").classList.add("oculto");
-  document.getElementById("botao-reabrir-menu").style.display = "block";
-}
-
-// Funções de geração de grade e inserção de palavras
-
-function gerarGrade(linhas, colunas, palavras) {
-  let grade = Array.from({ length: linhas }, () => Array(colunas).fill(""));
-  palavras.forEach(palavra => {
-    let colocado = false;
-    for (let tentativa = 0; tentativa < 100 && !colocado; tentativa++) {
-      const horizontal = Math.random() > 0.5;
-      const maxX = horizontal ? linhas : linhas - palavra.length;
-      const maxY = horizontal ? colunas - palavra.length : colunas;
-      const x = Math.floor(Math.random() * maxX);
-      const y = Math.floor(Math.random() * maxY);
-      let podeColocar = true;
-      for (let i = 0; i < palavra.length; i++) {
-        const nx = x + (horizontal ? 0 : i);
-        const ny = y + (horizontal ? i : 0);
-        if (grade[nx][ny] !== "" && grade[nx][ny] !== palavra[i]) {
-          podeColocar = false;
-          break;
-        }
-      }
-      if (podeColocar) {
-        for (let i = 0; i < palavra.length; i++) {
-          const nx = x + (horizontal ? 0 : i);
-          const ny = y + (horizontal ? i : 0);
-          grade[nx][ny] = palavra[i];
-        }
-        colocado = true;
-      }
-    }
-  });
-
-  const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  for (let i = 0; i < linhas; i++) {
-    for (let j = 0; j < colunas; j++) {
-      if (grade[i][j] === "") {
-        grade[i][j] = letras[Math.floor(Math.random() * letras.length)];
-      }
-    }
-  }
-
-  return grade;
-}
-
-
-function desenharTabuleiro(grade) {
-  const tabuleiro = document.getElementById("tabuleiro");
-  tabuleiro.innerHTML = "";
-  for (let i = 0; i < grade.length; i++) {
-    for (let j = 0; j < grade[i].length; j++) {
-      const cel = document.createElement("div");
-      cel.className = "letra";
-      cel.textContent = grade[i][j];
-      cel.dataset.x = i;
-      cel.dataset.y = j;
-      tabuleiro.appendChild(cel);
-    }
-  }
-}
-
-window.iniciarJogo = function() {
-  const grid = document.getElementById("word-grid");
-  if (!grid) { console.error("Elemento #word-grid não encontrado."); return; }
-   document.getElementById("word-grid");
-  if (!grid) { console.error("Elemento #word-grid não encontrado."); return; }
-if (!palavras || palavras.length === 0) {
-    palavras = Object.values(categorias).flat().sort(() => 0.5 - Math.random()).slice(0, 5);
-  }
-  const palavrasSelecionadas = ["LUZ", "PAZ", "VIDA", "FORCA", "ENERGIA"];
-  const grade = gerarGrade(12, 12, palavrasSelecionadas);
-  desenharTabuleiro(grade);
-}
-
-
-let faseAtual = 1;
-let pontuacao = 0;
-
-function avancarParaProximaFase() {
-  faseAtual++;
-  pontuacao += tempoRestante;
-  mostrarTelaFimDeFase();
-}
-
-function mostrarTelaFimDeFase() {
-  const overlay = document.createElement("div");
-  overlay.id = "tela-fim";
-  overlay.innerHTML = `
-    <div class="caixa-fim">
-      <h2>🎉 Fase ${faseAtual - 1} concluída!</h2>
-      <p>⏱️ Tempo restante: ${tempoRestante}s</p>
-      <p>⭐ Pontuação atual: ${pontuacao}</p>
-      <button onclick="proximaFase()">▶️ Próxima Fase</button>
-    </div>
-  `;
-  document.body.appendChild(overlay);
-}
-
-function proximaFase() {
-  document.getElementById("tela-fim").remove();
-  gerarPalavrasAleatorias();
-  iniciarJogo();
-}
-
-function tocarSom(tipo) {
-  const sons = {
-    acerto: new Audio("ding.wav"),
-    erro: new Audio("erro.wav"),
-    tempo: new Audio("tempo.wav")
-  };
-  sons[tipo]?.play();
-}
-
-// Alterar parte do finalizarSelecao para tocar som e chamar próxima fase
-const originalFinalizarSelecao = finalizarSelecao;
-finalizarSelecao = function() {
-  const palavra = selecaoAtual.toUpperCase();
-  if (palavras.includes(palavra) && !palavrasEncontradas.includes(palavra)) {
-    palavrasEncontradas.push(palavra);
-    document.querySelectorAll(".letter.selected").forEach(el => el.classList.add("found"));
-    atualizarPlacar();
-    tocarSom("acerto");
-
-    if (palavrasEncontradas.length === palavras.length) {
-      clearInterval(intervalo);
-      avancarParaProximaFase();
-    }
-  } else {
-    tocarSom("erro");
-  }
-  document.querySelectorAll(".letter.selected").forEach(el => el.classList.remove("selected"));
-  selecionando = false;
-  selecaoAtual = "";
 };
