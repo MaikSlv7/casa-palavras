@@ -11,7 +11,7 @@ const categorias = {
   cores: ["AZUL", "VERMELHO", "VERDE", "AMARELO"]
 };
 
-function selecionarCategoria() {
+window.selecionarCategoria = function() {
   const categoria = document.getElementById("categoria").value;
   palavras = categoria && categorias[categoria] ? [...categorias[categoria]] :
     Object.values(categorias).flat().sort(() => 0.5 - Math.random()).slice(0, 5);
