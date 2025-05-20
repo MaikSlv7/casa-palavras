@@ -30,6 +30,8 @@ function atualizarListaPalavras() {
 }
 
 window.iniciarJogo = function() {
+  const grid = document.getElementById("word-grid");
+  if (!grid) { console.error("Elemento #word-grid não encontrado."); return; }
   let grid = document.getElementById("word-grid");
   if (!grid) { console.error("Elemento #word-grid não encontrado."); return; }
 if (!palavras || palavras.length === 0) {
@@ -194,6 +196,8 @@ function desenharTabuleiro(grade) {
 }
 
 window.iniciarJogo = function() {
+  const grid = document.getElementById("word-grid");
+  if (!grid) { console.error("Elemento #word-grid não encontrado."); return; }
    document.getElementById("word-grid");
   if (!grid) { console.error("Elemento #word-grid não encontrado."); return; }
 if (!palavras || palavras.length === 0) {
