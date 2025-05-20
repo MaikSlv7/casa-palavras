@@ -30,6 +30,9 @@ function atualizarListaPalavras() {
 }
 
 function iniciarJogo() {
+if (!palavras || palavras.length === 0) {
+    palavras = Object.values(categorias).flat().sort(() => 0.5 - Math.random()).slice(0, 5);
+  }
   const grid = document.getElementById("word-grid");
   const nivel = document.querySelector('input[name="nivel"]:checked').value;
   const tamanho = nivel === "facil" ? 10 : nivel === "medio" ? 12 : 16;
@@ -191,6 +194,9 @@ function desenharTabuleiro(grade) {
 }
 
 function iniciarJogo() {
+if (!palavras || palavras.length === 0) {
+    palavras = Object.values(categorias).flat().sort(() => 0.5 - Math.random()).slice(0, 5);
+  }
   const palavrasSelecionadas = ["LUZ", "PAZ", "VIDA", "FORCA", "ENERGIA"];
   const grade = gerarGrade(12, 12, palavrasSelecionadas);
   desenharTabuleiro(grade);
