@@ -69,9 +69,23 @@ window.reexibirMenu = function() {
 };
 
 function atualizarListaPalavras() {
-  const texto = palavras.join(" - ");
-  document.getElementById("lista-palavras-span").textContent = texto;
-  document.getElementById("lista-palavras-span-overlay").textContent = texto;
+  const span = document.getElementById("lista-palavras-span");
+  const overlay = document.getElementById("lista-palavras-span-overlay");
+
+  span.innerHTML = "";
+  overlay.innerHTML = "";
+
+  palavras.forEach(palavra => {
+    const riscada = palavrasEncontradas.includes(palavra);
+    const spanPalavra = document.createElement("span");
+    spanPalavra.textContent = palavra;
+    if (riscada) spanPalavra.style.textDecoration = "line-through";
+    spanPalavra.style.marginRight = "8px";
+
+    const clone = spanPalavra.cloneNode(true);
+    span.appendChild(spanPalavra);
+    overlay.appendChild(clone);
+  });
 }
 
 function atualizarPlacar() {
