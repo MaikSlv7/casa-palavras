@@ -195,3 +195,64 @@ function iniciarJogo() {
   const grade = gerarGrade(12, 12, palavrasSelecionadas);
   desenharTabuleiro(grade);
 }
+
+
+let faseAtual = 1;
+let pontuacao = 0;
+
+function avancarParaProximaFase() {
+  faseAtual++;
+  pontuacao += tempoRestante;
+  mostrarTelaFimDeFase();
+}
+
+function mostrarTelaFimDeFase() {
+  const overlay = document.createElement("div");
+  overlay.id = "tela-fim";
+  overlay.innerHTML = `
+    <div class="caixa-fim">
+      <h2>🎉 Fase ${faseAtual - 1} concluída!</h2>
+      <p>⏱️ Tempo restante: ${tempoRestante}s</p>
+      <p>⭐ Pontuação atual: ${pontuacao}</p>
+      <button onclick="proximaFase()">▶️ Próxima Fase</button>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+}
+
+function proximaFase() {
+  document.getElementById("tela-fim").remove();
+  gerarPalavrasAleatorias();
+  iniciarJogo();
+}
+
+function tocarSom(tipo) {
+  const sons = {
+    acerto: new Audio("ding.wav"),
+    erro: new Audio("erro.wav"),
+    tempo: new Audio("tempo.wav")
+  };
+  sons[tipo]?.play();
+}
+
+// Alterar parte do finalizarSelecao para tocar som e chamar próxima fase
+const originalFinalizarSelecao = finalizarSelecao;
+finalizarSelecao = function() {
+  const palavra = selecaoAtual.toUpperCase();
+  if (palavras.includes(palavra) && !palavrasEncontradas.includes(palavra)) {
+    palavrasEncontradas.push(palavra);
+    document.querySelectorAll(".letter.selected").forEach(el => el.classList.add("found"));
+    atualizarPlacar();
+    tocarSom("acerto");
+
+    if (palavrasEncontradas.length === palavras.length) {
+      clearInterval(intervalo);
+      avancarParaProximaFase();
+    }
+  } else {
+    tocarSom("erro");
+  }
+  document.querySelectorAll(".letter.selected").forEach(el => el.classList.remove("selected"));
+  selecionando = false;
+  selecaoAtual = "";
+};

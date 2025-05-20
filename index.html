@@ -5,6 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Caça-Palavras</title>
   <link rel="stylesheet" href="style.css" />
+
+<style>
+#tela-fim {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5000;
+}
+.caixa-fim {
+  background: #222;
+  color: #0ff;
+  padding: 30px;
+  border-radius: 10px;
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  width: 300px;
+}
+.caixa-fim button {
+  margin-top: 15px;
+  padding: 8px 12px;
+  background: #0ff;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Press Start 2P', cursive;
+  cursor: pointer;
+}
+</style>
+
 </head>
 <body class="tema-retro">
   <div id="lista-palavras-overlay"><span id="lista-palavras-span-overlay"></span></div>
