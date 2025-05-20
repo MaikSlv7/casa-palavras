@@ -42,17 +42,23 @@ function iniciarJogo() {
   grid.innerHTML = "";
   grid.style.gridTemplateColumns = `repeat(${tamanho}, 1fr)`;
 
-  for (let i = 0; i < total; i++) {
-    const div = document.createElement("div");
-    div.className = "letter";
-    div.textContent = letras[Math.floor(Math.random() * letras.length)];
-    div.onmousedown = (e) => iniciarSelecao(e, div);
-    div.onmouseover = (e) => continuarSelecao(e, div);
-    div.onmouseup = () => finalizarSelecao();
-    div.ontouchstart = (e) => iniciarSelecao(e, div);
-    div.ontouchmove = (e) => continuarSelecao(e, div);
-    div.ontouchend = () => finalizarSelecao();
-    grid.appendChild(div);
+  const linhas = tamanho;
+  const colunas = tamanho;
+  const grade = gerarGrade(linhas, colunas, palavras);
+
+  for (let i = 0; i < linhas; i++) {
+    for (let j = 0; j < colunas; j++) {
+      const div = document.createElement("div");
+      div.className = "letter";
+      div.textContent = grade[i][j] || letras[Math.floor(Math.random() * letras.length)];
+      div.onmousedown = (e) => iniciarSelecao(e, div);
+      div.onmouseover = (e) => continuarSelecao(e, div);
+      div.onmouseup = () => finalizarSelecao();
+      div.ontouchstart = (e) => iniciarSelecao(e, div);
+      div.ontouchmove = (e) => continuarSelecao(e, div);
+      div.ontouchend = () => finalizarSelecao();
+      grid.appendChild(div);
+    }
   }
 
   iniciarCronometro(nivel);
