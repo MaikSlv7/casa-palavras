@@ -30,6 +30,8 @@ function atualizarListaPalavras() {
 }
 
 function iniciarJogo() {
+  const grid = document.getElementById("word-grid");
+  if (!grid) { console.error("Elemento #word-grid não encontrado."); return; }
 if (!palavras || palavras.length === 0) {
     palavras = Object.values(categorias).flat().sort(() => 0.5 - Math.random()).slice(0, 5);
   }
@@ -131,8 +133,6 @@ function fecharMenu() {
   document.getElementById("botao-reabrir-menu").style.display = "block";
 }
 
-document.getElementById("botao-iniciar").addEventListener("click", iniciarJogo);
-
 // Funções de geração de grade e inserção de palavras
 
 function gerarGrade(linhas, colunas, palavras) {
@@ -194,6 +194,8 @@ function desenharTabuleiro(grade) {
 }
 
 function iniciarJogo() {
+  const grid = document.getElementById("word-grid");
+  if (!grid) { console.error("Elemento #word-grid não encontrado."); return; }
 if (!palavras || palavras.length === 0) {
     palavras = Object.values(categorias).flat().sort(() => 0.5 - Math.random()).slice(0, 5);
   }
