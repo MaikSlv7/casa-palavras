@@ -18,7 +18,7 @@ function selecionarCategoria() {
   atualizarListaPalavras();
 }
 
-function gerarPalavrasAleatorias() {
+window.gerarPalavrasAleatorias = function() {
   palavras = Object.values(categorias).flat().sort(() => 0.5 - Math.random()).slice(0, 5);
   atualizarListaPalavras();
 }
@@ -29,13 +29,13 @@ function atualizarListaPalavras() {
   document.getElementById("lista-palavras-span-overlay").textContent = texto;
 }
 
-function iniciarJogo() {
-  const grid = document.getElementById("word-grid");
+window.iniciarJogo = function() {
+  let grid = document.getElementById("word-grid");
   if (!grid) { console.error("Elemento #word-grid não encontrado."); return; }
 if (!palavras || palavras.length === 0) {
     palavras = Object.values(categorias).flat().sort(() => 0.5 - Math.random()).slice(0, 5);
   }
-  const grid = document.getElementById("word-grid");
+   document.getElementById("word-grid");
   const nivel = document.querySelector('input[name="nivel"]:checked').value;
   const tamanho = nivel === "facil" ? 10 : nivel === "medio" ? 12 : 16;
   const total = tamanho * tamanho;
@@ -122,13 +122,13 @@ function finalizarSelecao() {
   selecaoAtual = "";
 }
 
-function reexibirMenu() {
+window.reexibirMenu = function() {
   document.getElementById("menu-lateral").classList.remove("oculto");
   document.getElementById("botao-reabrir-menu").style.display = "none";
   clearInterval(intervalo);
 }
 
-function fecharMenu() {
+window.fecharMenu = function() {
   document.getElementById("menu-lateral").classList.add("oculto");
   document.getElementById("botao-reabrir-menu").style.display = "block";
 }
@@ -193,8 +193,8 @@ function desenharTabuleiro(grade) {
   }
 }
 
-function iniciarJogo() {
-  const grid = document.getElementById("word-grid");
+window.iniciarJogo = function() {
+   document.getElementById("word-grid");
   if (!grid) { console.error("Elemento #word-grid não encontrado."); return; }
 if (!palavras || palavras.length === 0) {
     palavras = Object.values(categorias).flat().sort(() => 0.5 - Math.random()).slice(0, 5);
