@@ -108,3 +108,51 @@ function gerarGrade(linhas, colunas, palavras) {
 
   return grade;
 }
+function iniciarSelecao(event, el) {
+  selecionando = true;
+  selecaoAtual = el.textContent;
+  el.classList.add("selected");
+}
+
+function continuarSelecao(event, el) {
+  if (selecionando) {
+    selecaoAtual += el.textContent;
+    el.classList.add("selected");
+  }
+}
+
+function finalizarSelecao() {
+  const palavra = selecaoAtual.toUpperCase();
+  if (palavras.includes(palavra) && !palavrasEncontradas.includes(palavra)) {
+    palavrasEncontradas.push(palavra);
+    document.querySelectorAll(".letter.selected").forEach(el => el.classList.add("found"));
+    atualizarPlacar();
+    if (palavrasEncontradas.length === palavras.length) {
+      clearInterval(intervalo);
+      alert("🎉 Você encontrou todas as palavras!");
+    }
+  }
+  document.querySelectorAll(".letter.selected").forEach(el => el.classList.remove("selected"));
+  selecionando = false;
+  selecaoAtual = "";
+}
+
+function iniciarCronometro(nivel) {
+  clearInterval(intervalo);
+  tempoRestante = nivel === "facil" ? 300 : nivel === "medio" ? 240 : 180;
+  atualizarCronometro();
+  intervalo = setInterval(() => {
+    tempoRestante--;
+    atualizarCronometro();
+    if (tempoRestante <= 0) {
+      clearInterval(intervalo);
+      alert("⏰ Tempo esgotado!");
+    }
+  }, 1000);
+}
+
+function atualizarCronometro() {
+  const min = String(Math.floor(tempoRestante / 60)).padStart(2, '0');
+  const sec = String(tempoRestante % 60).padStart(2, '0');
+  document.getElementById("cronometro").textContent = `⏱️ ${min}:${sec}`;
+}
