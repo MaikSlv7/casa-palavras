@@ -77,3 +77,34 @@ function atualizarListaPalavras() {
 function atualizarPlacar() {
   document.getElementById("progresso").textContent = `🔎 ${palavrasEncontradas.length} / ${palavras.length}`;
 }
+function gerarGrade(linhas, colunas, palavras) {
+  let grade = Array.from({ length: linhas }, () => Array(colunas).fill(""));
+
+  palavras.forEach(palavra => {
+    let colocado = false;
+    for (let tentativa = 0; tentativa < 100 && !colocado; tentativa++) {
+      const horizontal = Math.random() > 0.5;
+      const x = Math.floor(Math.random() * (horizontal ? linhas : linhas - palavra.length));
+      const y = Math.floor(Math.random() * (horizontal ? colunas - palavra.length : colunas));
+
+      let cabe = true;
+      for (let i = 0; i < palavra.length; i++) {
+        const letra = horizontal ? grade[x][y + i] : grade[x + i][y];
+        if (letra && letra !== palavra[i]) {
+          cabe = false;
+          break;
+        }
+      }
+
+      if (cabe) {
+        for (let i = 0; i < palavra.length; i++) {
+          if (horizontal) grade[x][y + i] = palavra[i];
+          else grade[x + i][y] = palavra[i];
+        }
+        colocado = true;
+      }
+    }
+  });
+
+  return grade;
+}
