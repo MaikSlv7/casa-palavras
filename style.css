@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 
 body {
   font-family: 'Courier New', monospace;
@@ -9,8 +12,8 @@ body {
 
 button {
   margin: 10px;
-  padding: 12px 24px;
-  font-size: 16px;
+  padding: 10px 20px;
+  font-size: 14px;
   background-color: #333;
   color: #eee;
   border: 2px solid #555;
@@ -28,18 +31,18 @@ button:active {
 
 #word-grid {
   display: grid;
-  gap: 2px;
+  gap: 1px; /* Mínimo possível */
   margin-top: 20px;
   justify-content: center;
 }
 
 .letter {
-  width: 30px;
-  height: 30px;
+  width: 25px; /* Mais compacto */
+  height: 25px;
+  font-size: 12px;
   background: #222;
   color: #eee;
   border: 1px solid #555;
-  font-family: 'Courier New', monospace;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,7 +53,7 @@ button:active {
 
 .letter:hover {
   background-color: #333;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .letter.selected {
@@ -67,7 +70,7 @@ button:active {
 
 #cronometro, #progresso {
   margin: 10px;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 #lista-palavras {
@@ -83,13 +86,13 @@ button:active {
 
 @media (max-width: 600px) {
   .letter {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     font-size: 10px;
   }
 
   button {
-    padding: 10px 20px;
-    font-size: 14px;
+    padding: 8px 16px;
+    font-size: 12px;
   }
 }
