@@ -1,91 +1,49 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 20px;
+}
 
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-body.tema-retro {
-  font-family: 'Press Start 2P', cursive;
-  background-color: #111;
-  color: #0ff;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
 }
-#container-jogo {
-  display: flex;
-  height: 100vh;
-}
-#menu-lateral {
-  width: 280px;
-  background: #222;
-  padding: 20px;
-  overflow-y: auto;
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  transform: translateX(0);
-  z-index: 2000;
-  transition: transform 0.3s ease;
-}
-#menu-lateral.oculto {
-  transform: translateX(-100%);
-}
-#botao-reabrir-menu {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  font-size: 10px;
-  padding: 6px 10px;
-  background: #0ff;
-  border-radius: 6px;
-  z-index: 1001;
-  font-family: 'Press Start 2P', cursive;
-}
-#tabuleiro-area {
-  flex: 1;
-  padding-top: 60px;
-  padding-left: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  box-sizing: border-box;
-}
+
 #word-grid {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
   gap: 5px;
+  margin-top: 20px;
   justify-content: center;
 }
+
 .letter {
-  background: #444;
-  color: #0ff;
-  font-size: 12px;
   width: 30px;
   height: 30px;
+  background: #f0f0f0;
   display: flex;
   align-items: center;
   justify-content: center;
-  user-select: none;
   cursor: pointer;
+  user-select: none;
+  border: 1px solid #ccc;
 }
+
 .letter.selected {
-  background-color: #0ff;
-  color: #000;
+  background: #ffd54f;
 }
+
 .letter.found {
-  background-color: #0a0;
-  color: #fff;
+  background: #81c784;
+  color: white;
+  text-decoration: line-through;
 }
-#lista-palavras-overlay {
-  position: fixed;
-  top: 5px;
-  left: 0;
-  width: 100%;
-  padding: 6px 12px;
-  background: rgba(0,0,0,0.8);
-  color: #0ff;
-  font-size: 10px;
-  text-align: center;
-  font-family: 'Press Start 2P', cursive;
-  z-index: 1500;
-  box-sizing: border-box;
+
+#cronometro, #progresso {
+  margin: 10px;
+  font-size: 18px;
+}
+
+#lista-palavras {
+  margin: 10px;
 }
