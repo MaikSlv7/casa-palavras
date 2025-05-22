@@ -42,8 +42,7 @@ window.iniciarJogo = function() {
       div.ontouchmove = (e) => continuarSelecao(e, div);
       div.ontouchend = () => finalizarSelecao();
       grid.appendChild(div);
-    }
-  }
+
 
   iniciarCronometro(config.tempo);
 };
@@ -89,11 +88,10 @@ function atualizarListaPalavras() {
     span.appendChild(spanPalavra);
     overlay.appendChild(clone);
   });
-}
 
 function atualizarPlacar() {
   document.getElementById("progresso").textContent = `🔎 ${palavrasEncontradas.length} / ${palavras.length}`;
-}
+
 function gerarGrade(linhas, colunas, palavras) {
   let grade = Array.from({ length: linhas }, () => Array(colunas).fill(""));
 
@@ -110,33 +108,30 @@ function gerarGrade(linhas, colunas, palavras) {
         if (letra && letra !== palavra[i]) {
           cabe = false;
           break;
-        }
-      }
+
 
       if (cabe) {
         for (let i = 0; i < palavra.length; i++) {
           if (horizontal) grade[x][y + i] = palavra[i];
           else grade[x + i][y] = palavra[i];
-        }
+
         colocado = true;
-      }
-    }
+
+
   });
 
   return grade;
-}
+
 function iniciarSelecao(event, el) {
   selecionando = true;
   selecaoAtual = el.textContent;
   el.classList.add("selected");
-}
 
 function continuarSelecao(event, el) {
   if (selecionando) {
     selecaoAtual += el.textContent;
     el.classList.add("selected");
-  }
-}
+
 
 function finalizarSelecao() {
   const palavra = selecaoAtual.toUpperCase();
@@ -148,8 +143,8 @@ function finalizarSelecao() {
     if (palavrasEncontradas.length === palavras.length) {
       clearInterval(intervalo);
       avancarFase();
-    }
-  }
+
+
   document.querySelectorAll(".letter.selected").forEach(el => el.classList.remove("selected"));
   selecionando = false;
   selecaoAtual = "";
@@ -157,7 +152,6 @@ function finalizarSelecao() {
   document.querySelectorAll(".letter.selected").forEach(el => el.classList.remove("selected"));
   selecionando = false;
   selecaoAtual = "";
-}
 
 function iniciarCronometro(nivel) {
   clearInterval(intervalo);
@@ -169,15 +163,14 @@ function iniciarCronometro(nivel) {
     if (tempoRestante <= 0) {
       clearInterval(intervalo);
       alert("⏰ Tempo esgotado!");
-    }
+
   }, 1000);
-}
 
 function atualizarCronometro() {
   const min = String(Math.floor(tempoRestante / 60)).padStart(2, '0');
   const sec = String(tempoRestante % 60).padStart(2, '0');
   document.getElementById("cronometro").textContent = `⏱️ ${min}:${sec}`;
-}
+
 let faseAtual = 1;
 const totalFases = 5;
 
@@ -188,7 +181,6 @@ function configurarFase() {
     numPalavras: 4 + (faseAtual - 1)
   };
   return config;
-}
 
 function avancarFase() {
   if (faseAtual < totalFases) {
@@ -199,5 +191,4 @@ function avancarFase() {
     alert("🏆 Parabéns, você completou todas as fases!");
     faseAtual = 1;
     iniciarJogo();
-  }
-}
+
