@@ -13,12 +13,15 @@ const categorias = {
 
 
 window.iniciarJogo = function() {
+  const config = configurarFase();
+  const tamanho = config.tamanho;
+  const numPalavras = config.numPalavras;
   const grid = document.getElementById("word-grid");
   if (!grid) { console.error("Elemento #word-grid não encontrado."); return; }
 
-  const nivel = document.querySelector('input[name="nivel"]:checked').value;
-  const tamanho = nivel === "facil" ? 10 : nivel === "medio" ? 12 : 16;
-  const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  palavras = Object.values(categorias).flat().sort(() => 0.5 - Math.random()).slice(0, numPalavras);
+  atualizarListaPalavras();
+
   palavrasEncontradas = [];
   atualizarPlacar();
   grid.innerHTML = "";
@@ -31,7 +34,7 @@ window.iniciarJogo = function() {
     for (let j = 0; j < colunas; j++) {
       const div = document.createElement("div");
       div.className = "letter";
-      div.textContent = grade[i][j] || letras[Math.floor(Math.random() * letras.length)];
+      div.textContent = grade[i][j] || "ABCDEFGHIJKLMNOPQRSTUVWXYZ".charAt(Math.floor(Math.random() * 26));
       div.onmousedown = (e) => iniciarSelecao(e, div);
       div.onmouseover = (e) => continuarSelecao(e, div);
       div.onmouseup = () => finalizarSelecao();
@@ -42,7 +45,7 @@ window.iniciarJogo = function() {
     }
   }
 
-  iniciarCronometro(nivel);
+  iniciarCronometro(config.tempo);
 };
 
 window.gerarPalavrasAleatorias = function() {
@@ -141,11 +144,16 @@ function finalizarSelecao() {
     palavrasEncontradas.push(palavra);
     document.querySelectorAll(".letter.selected").forEach(el => el.classList.add("found"));
     atualizarPlacar();
+    atualizarListaPalavras();
     if (palavrasEncontradas.length === palavras.length) {
       clearInterval(intervalo);
-      alert("🎉 Você encontrou todas as palavras!");
+      avancarFase();
     }
   }
+  document.querySelectorAll(".letter.selected").forEach(el => el.classList.remove("selected"));
+  selecionando = false;
+  selecaoAtual = "";
+}}
   document.querySelectorAll(".letter.selected").forEach(el => el.classList.remove("selected"));
   selecionando = false;
   selecaoAtual = "";
@@ -169,4 +177,27 @@ function atualizarCronometro() {
   const min = String(Math.floor(tempoRestante / 60)).padStart(2, '0');
   const sec = String(tempoRestante % 60).padStart(2, '0');
   document.getElementById("cronometro").textContent = `⏱️ ${min}:${sec}`;
+}
+let faseAtual = 1;
+const totalFases = 5;
+
+function configurarFase() {
+  let config = {
+    tamanho: 8 + (faseAtual - 1) * 2,
+    tempo: 300 - (faseAtual - 1) * 60,
+    numPalavras: 4 + (faseAtual - 1)
+  };
+  return config;
+}
+
+function avancarFase() {
+  if (faseAtual < totalFases) {
+    faseAtual++;
+    alert(`✅ Parabéns! Avançando para a Fase ${faseAtual}...`);
+    iniciarJogo();
+  } else {
+    alert("🏆 Parabéns, você completou todas as fases!");
+    faseAtual = 1;
+    iniciarJogo();
+  }
 }
