@@ -193,3 +193,13 @@ function reexibirMenu() {
   document.getElementById("botao-reabrir-menu").style.display = "none";
   clearInterval(intervalo);
 }
+window.fecharMenu = function() {
+  document.getElementById("menu-lateral").classList.add("oculto");
+  document.getElementById("botao-reabrir-menu").style.display = "block";
+}
+
+window.reexibirMenu = function() {
+  document.getElementById("menu-lateral").classList.remove("oculto");
+  document.getElementById("botao-reabrir-menu").style.display = "none";
+  clearInterval(intervalo);
+}
