@@ -182,3 +182,14 @@ function atualizarListaPalavras() {
 function atualizarPlacar() {
   document.getElementById("progresso").textContent = `🔎 ${palavrasEncontradas.length} / ${palavras.length}`;
 }
+
+function fecharMenu() {
+  document.getElementById("menu-lateral").classList.add("oculto");
+  document.getElementById("botao-reabrir-menu").style.display = "block";
+}
+
+function reexibirMenu() {
+  document.getElementById("menu-lateral").classList.remove("oculto");
+  document.getElementById("botao-reabrir-menu").style.display = "none";
+  clearInterval(intervalo);
+}
