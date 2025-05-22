@@ -1,3 +1,4 @@
+
 * {
   box-sizing: border-box;
 }
@@ -31,13 +32,13 @@ button:active {
 
 #word-grid {
   display: grid;
-  gap: 1px; /* Mínimo possível */
+  gap: 1px;
   margin-top: 20px;
   justify-content: center;
 }
 
 .letter {
-  width: 25px; /* Mais compacto */
+  width: 25px;
   height: 25px;
   font-size: 12px;
   background: #222;
