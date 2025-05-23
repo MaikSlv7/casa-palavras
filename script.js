@@ -88,3 +88,8 @@ function avancarFase() {
     iniciarJogo();
   }
 }
+
+
+function selecionarCategoria() {
+  selecionarModo('categorias');
+}
