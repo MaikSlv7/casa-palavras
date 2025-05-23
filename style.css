@@ -1,3 +1,4 @@
+
 * {
   box-sizing: border-box;
 }
@@ -18,81 +19,26 @@ button {
   color: #eee;
   border: 2px solid #555;
   cursor: pointer;
-  transition: transform 0.1s ease;
 }
 
-button:hover {
-  background-color: #555;
-}
-
-button:active {
-  transform: scale(0.95);
-}
-
-#word-grid {
+#tabuleiro {
   display: grid;
-  gap: 1px; /* Mínimo possível */
-  margin-top: 20px;
+  gap: 8px;
   justify-content: center;
+  margin: 20px auto;
+  max-width: 90vw;
+  min-width: 320px; /* evita colapsar */
 }
 
-.letter {
-  width: 25px; /* Mais compacto */
-  height: 25px;
-  font-size: 12px;
-  background: #222;
-  color: #eee;
-  border: 1px solid #555;
+.celula {
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #222;
+  border: 1px solid #555;
   cursor: pointer;
   user-select: none;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-}
-
-.letter:hover {
-  background-color: #333;
-  transform: scale(1.05);
-}
-
-.letter.selected {
-  background: #ffd54f;
-  color: #111;
-  font-weight: bold;
-}
-
-.letter.found {
-  background: #81c784;
-  color: #111;
-  text-decoration: line-through;
-}
-
-#cronometro, #progresso {
-  margin: 10px;
-  font-size: 18px;
-}
-
-#lista-palavras {
-  margin: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-#lista-palavras span {
-  margin: 5px;
-}
-
-@media (max-width: 600px) {
-  .letter {
-    width: 20px;
-    height: 20px;
-    font-size: 10px;
-  }
-
-  button {
-    padding: 8px 16px;
-    font-size: 12px;
-  }
+  font-size: 20px;
 }
