@@ -1,25 +1,80 @@
-
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Caça-Palavras</title>
-  <link rel="stylesheet" href="style.css?v=2">
-  <link rel="icon" type="image/png" href="icon-512.png">
+  <link rel="stylesheet" href="style.css" />
+
+<style>
+#tela-fim {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5000;
+}
+.caixa-fim {
+  background: #222;
+  color: #0ff;
+  padding: 30px;
+  border-radius: 10px;
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  width: 300px;
+}
+.caixa-fim button {
+  margin-top: 15px;
+  padding: 8px 12px;
+  background: #0ff;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Press Start 2P', cursive;
+  cursor: pointer;
+}
+</style>
+
 </head>
-<body>
-
-<div id="selecao-modo">
-  <h2>Escolha o modo de jogo:</h2>
-  <button onclick="selecionarModo('frutas')">Frutas</button>
-  <button onclick="selecionarModo('animais')">Animais</button>
-  <button onclick="selecionarModo('fases')">Fases</button>
-</div>
-
-<div id="tabuleiro"></div>
-
-<div id="palavras"></div>
-
-<script src="script.js"></script>
+<body class="tema-retro">
+  <div id="lista-palavras-overlay"><span id="lista-palavras-span-overlay"></span></div>
+  <div id="container-jogo">
+    <div id="menu-lateral">
+      <button id="botao-fechar-menu" onclick="fecharMenu()">⬅️ Fechar</button>
+      <h3>Menu</h3>
+      <label>👤 Nome:<br><input id="nome-jogador" type="text" placeholder="Digite seu nome"></label><br><br>
+      <label>📂 Categoria:<br>
+        <select id="categoria" onchange="selecionarCategoria()">
+          <option value="">Aleatória</option>
+          <option value="frutas">Frutas</option>
+          <option value="animais">Animais</option>
+          <option value="cores">Cores</option>
+        </select>
+      </label><br><br>
+      <label>🎯 Dificuldade:<br>
+        <label><input type="radio" name="nivel" value="facil" checked> Fácil</label><br>
+        <label><input type="radio" name="nivel" value="medio"> Médio</label><br>
+        <label><input type="radio" name="nivel" value="dificil"> Difícil</label>
+      </label><br><br>
+      <button onclick="gerarPalavrasAleatorias()">🔁 Gerar Palavras Aleatórias</button><br><br>
+      <button onclick="iniciarJogo()">▶️ Iniciar Jogo</button><br><br>
+      <div>📋 Palavras: <span id="lista-palavras-span"></span></div>
+    </div>
+    <div id="tabuleiro-area">
+      <div id="painel-info">
+        <span id="cronometro">⏱️ 00:00</span> | <span id="progresso">🔎 0 / 0</span>
+      </div>
+      <div id="word-grid"></div>
+    </div>
+  </div>
+  <button id="botao-reabrir-menu" onclick="reexibirMenu()">🔧</button>
+  
+  <script src="script.js"></script>
+<div><button onclick="selecionarModo('fases')">Modo Fases Infinitas</button></div>
 </body>
 </html>

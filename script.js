@@ -1,31 +1,39 @@
 
-let modoAtual = "";
 let palavras = [];
 let palavrasEncontradas = [];
 let selecionando = false;
 let selecaoAtual = "";
 let tempoRestante = 0;
-let intervalo;
+let intervalo = null;
+
+let modoAtual = "categorias";  // categorias ou fases
 let faseAtual = 1;
 let tamanhoTabuleiro = 8;
 let quantidadePalavras = 3;
 
-function selecionarModo(modo) {
+const categorias = {
+  frutas: ["MACA", "BANANA", "UVA", "KIWI"],
+  animais: ["GATO", "LEAO", "ZEBRA", "TUBARAO"],
+  cores: ["AZUL", "VERMELHO", "VERDE", "AMARELO"]
+};
+
+window.selecionarModo = function(modo) {
   modoAtual = modo;
-  if (modo === "fases") {
+  if (modoAtual === "fases") {
     faseAtual = 1;
     tamanhoTabuleiro = 8;
     quantidadePalavras = 3;
     palavras = gerarPalavrasAleatorias(quantidadePalavras);
   } else {
-    palavras = categorias[modo];
+    const categoria = document.getElementById("categoria").value;
+    palavras = categoria && categorias[categoria] ? [...categorias[categoria]] : [];
   }
-  document.getElementById('selecao-modo').style.display = 'none';
   iniciarJogo();
 }
 
 function iniciarJogo() {
-  const tabuleiro = document.getElementById('tabuleiro');
+  palavrasEncontradas = [];
+  const tabuleiro = document.getElementById("tabuleiro");
   tabuleiro.style.gridTemplateColumns = `repeat(${tamanhoTabuleiro}, 1fr)`;
   tabuleiro.innerHTML = '';
 
@@ -46,7 +54,7 @@ function gerarLetraAleatoria() {
 }
 
 function gerarPalavraAleatoria() {
-  const comprimento = Math.floor(Math.random() * 5) + 3; // de 3 a 7 letras
+  const comprimento = Math.floor(Math.random() * 5) + 3; // 3 a 7 letras
   let palavra = "";
   for (let i = 0; i < comprimento; i++) {
     palavra += gerarLetraAleatoria();
@@ -74,18 +82,9 @@ function selecionarCelula(celula) {
 function avancarFase() {
   if (modoAtual === "fases") {
     faseAtual++;
-    if (tamanhoTabuleiro < 16) {
-      tamanhoTabuleiro++;
-    }
-    if (quantidadePalavras < 16) {
-      quantidadePalavras++;
-    }
+    if (tamanhoTabuleiro < 16) tamanhoTabuleiro++;
+    if (quantidadePalavras < 16) quantidadePalavras++;
     palavras = gerarPalavrasAleatorias(quantidadePalavras);
     iniciarJogo();
   }
 }
-
-const categorias = {
-  frutas: ["BANANA", "MAÇA", "PERA", "UVA", "LARANJA", "MELANCIA"],
-  animais: ["CACHORRO", "GATO", "ELEFANTE", "LEAO", "TIGRE", "CAVALO"]
-};
