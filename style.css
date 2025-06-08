@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 body.tema-retro {
   font-family: 'Press Start 2P', cursive;
@@ -88,4 +87,5 @@ body.tema-retro {
   font-family: 'Press Start 2P', cursive;
   z-index: 1500;
   box-sizing: border-box;
+  display: none;
 }
