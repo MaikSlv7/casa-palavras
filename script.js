@@ -1,4 +1,3 @@
-
 let palavras = [];
 let palavrasEncontradas = [];
 let selecionando = false;
@@ -29,17 +28,22 @@ window.selecionarModo = function(modo) {
     palavras = categoria && categorias[categoria] ? [...categorias[categoria]] : [];
   }
   iniciarJogo();
-}
+};
+
+window.gerarNovasPalavras = function() {
+  palavras = gerarPalavrasAleatorias(quantidadePalavras);
+  exibirPalavras();
+};
 
 function iniciarJogo() {
   palavrasEncontradas = [];
-  const tabuleiro = document.getElementById("tabuleiro");
+  const tabuleiro = document.getElementById("word-grid");
   tabuleiro.style.gridTemplateColumns = `repeat(${tamanhoTabuleiro}, 1fr)`;
   tabuleiro.innerHTML = '';
 
   for (let i = 0; i < tamanhoTabuleiro * tamanhoTabuleiro; i++) {
     const celula = document.createElement('div');
-    celula.classList.add('celula');
+    celula.classList.add('letter');
     celula.textContent = gerarLetraAleatoria();
     celula.addEventListener('click', () => selecionarCelula(celula));
     tabuleiro.appendChild(celula);
@@ -72,11 +76,21 @@ function gerarPalavrasAleatorias(qtd) {
 
 function exibirPalavras() {
   const lista = document.getElementById('palavras');
-  lista.innerHTML = "Encontre: " + palavras.join(', ');
+  if (lista) {
+    lista.innerHTML = 'Encontre: ' + palavras.join(', ');
+  }
+  const spanMenu = document.getElementById('lista-palavras-span');
+  if (spanMenu) {
+    spanMenu.textContent = palavras.join(', ');
+  }
+  const spanOverlay = document.getElementById('lista-palavras-span-overlay');
+  if (spanOverlay) {
+    spanOverlay.textContent = palavras.join(', ');
+  }
 }
 
 function selecionarCelula(celula) {
-  celula.classList.toggle('selecionada');
+  celula.classList.toggle('selected');
 }
 
 function avancarFase() {
@@ -89,7 +103,24 @@ function avancarFase() {
   }
 }
 
-
 function selecionarCategoria() {
   selecionarModo('categorias');
 }
+
+window.fecharMenu = function() {
+  const menu = document.getElementById('menu-lateral');
+  menu.classList.add('oculto');
+  const btn = document.getElementById('botao-reabrir-menu');
+  if (btn) btn.style.display = 'block';
+  const overlay = document.getElementById('lista-palavras-overlay');
+  if (overlay) overlay.style.display = 'block';
+};
+
+window.reexibirMenu = function() {
+  const menu = document.getElementById('menu-lateral');
+  menu.classList.remove('oculto');
+  const btn = document.getElementById('botao-reabrir-menu');
+  if (btn) btn.style.display = 'none';
+  const overlay = document.getElementById('lista-palavras-overlay');
+  if (overlay) overlay.style.display = 'none';
+};
