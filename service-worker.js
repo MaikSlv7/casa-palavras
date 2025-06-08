@@ -1,4 +1,3 @@
-
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open('caca-palavras-v1').then(cache => {
@@ -9,7 +8,6 @@ self.addEventListener('install', e => {
         '/casa-palavras/script.js',
         '/casa-palavras/manifest.json',
         '/casa-palavras/icon-512.png',
-        '/casa-palavras/click.wav',
         '/casa-palavras/ding.wav',
         '/casa-palavras/erro.wav',
         '/casa-palavras/tempo.wav'
