@@ -32,7 +32,7 @@ window.selecionarModo = function(modo) {
 
 window.gerarNovasPalavras = function() {
   palavras = gerarPalavrasAleatorias(quantidadePalavras);
-  exibirPalavras();
+  iniciarJogo();
 };
 
 function iniciarJogo() {
@@ -41,12 +41,24 @@ function iniciarJogo() {
   tabuleiro.style.gridTemplateColumns = `repeat(${tamanhoTabuleiro}, 1fr)`;
   tabuleiro.innerHTML = '';
 
-  for (let i = 0; i < tamanhoTabuleiro * tamanhoTabuleiro; i++) {
-    const celula = document.createElement('div');
-    celula.classList.add('letter');
-    celula.textContent = gerarLetraAleatoria();
-    celula.addEventListener('click', () => selecionarCelula(celula));
-    tabuleiro.appendChild(celula);
+  const grade = [];
+  for (let y = 0; y < tamanhoTabuleiro; y++) {
+    grade[y] = [];
+    for (let x = 0; x < tamanhoTabuleiro; x++) {
+      grade[y][x] = gerarLetraAleatoria();
+    }
+  }
+
+  posicionarPalavrasNoTabuleiro(grade);
+
+  for (let y = 0; y < tamanhoTabuleiro; y++) {
+    for (let x = 0; x < tamanhoTabuleiro; x++) {
+      const celula = document.createElement('div');
+      celula.classList.add('letter');
+      celula.textContent = grade[y][x];
+      celula.addEventListener('click', () => selecionarCelula(celula));
+      tabuleiro.appendChild(celula);
+    }
   }
 
   exibirPalavras();
@@ -72,6 +84,50 @@ function gerarPalavrasAleatorias(qtd) {
     lista.push(gerarPalavraAleatoria());
   }
   return lista;
+}
+
+function posicionarPalavrasNoTabuleiro(grade) {
+  const direcoes = [
+    { x: 1, y: 0 },   // horizontal
+    { x: 0, y: 1 },   // vertical
+    { x: 1, y: 1 }    // diagonal
+  ];
+
+  const ocupado = Array.from({ length: tamanhoTabuleiro }, () =>
+    Array(tamanhoTabuleiro).fill(null)
+  );
+
+  for (const palavra of palavras) {
+    let colocado = false;
+    for (let tentativa = 0; tentativa < 100 && !colocado; tentativa++) {
+      const dir = direcoes[Math.floor(Math.random() * direcoes.length)];
+
+      const maxX = tamanhoTabuleiro - (dir.x ? palavra.length : 1);
+      const maxY = tamanhoTabuleiro - (dir.y ? palavra.length : 1);
+      const inicioX = Math.floor(Math.random() * (maxX + 1));
+      const inicioY = Math.floor(Math.random() * (maxY + 1));
+
+      let valido = true;
+      for (let k = 0; k < palavra.length; k++) {
+        const x = inicioX + dir.x * k;
+        const y = inicioY + dir.y * k;
+        if (ocupado[y][x] && ocupado[y][x] !== palavra[k]) {
+          valido = false;
+          break;
+        }
+      }
+
+      if (!valido) continue;
+
+      for (let k = 0; k < palavra.length; k++) {
+        const x = inicioX + dir.x * k;
+        const y = inicioY + dir.y * k;
+        grade[y][x] = palavra[k];
+        ocupado[y][x] = palavra[k];
+      }
+      colocado = true;
+    }
+  }
 }
 
 function exibirPalavras() {
